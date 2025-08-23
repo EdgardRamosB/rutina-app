@@ -126,7 +126,7 @@ const criteriosMujerPrincipianteGanarMasa = {
   3: [
     ["prensa de piernas", "peso muerto rumano", "femoral sentado", "extension de piernas"],
     ["Press banco plano", "curl bicep", "elevaciones laterales con mancuerna", "deltoide posterior en polea"],
-    // ["hip thrust con barra", "Zancada Smith", "patada sprinter", "femoral acostado"]
+    ["hip thrust con barra", "Zancada Smith", "patada sprinter", "femoral acostado"]
   ],
   4: [
     ["prensa de piernas", "peso muerto rumano", "extension de piernas"],
