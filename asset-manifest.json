@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/rutina-app/static/css/main.9b53c249.css",
-    "main.js": "/rutina-app/static/js/main.b7f31b90.js",
+    "main.css": "/rutina-app/static/css/main.c97270a0.css",
+    "main.js": "/rutina-app/static/js/main.d7cde87c.js",
     "static/js/977.992cdba6.chunk.js": "/rutina-app/static/js/977.992cdba6.chunk.js",
     "static/js/455.c21fddf9.chunk.js": "/rutina-app/static/js/455.c21fddf9.chunk.js",
     "static/js/488.01fc76c8.chunk.js": "/rutina-app/static/js/488.01fc76c8.chunk.js",
     "index.html": "/rutina-app/index.html",
-    "main.9b53c249.css.map": "/rutina-app/static/css/main.9b53c249.css.map",
-    "main.b7f31b90.js.map": "/rutina-app/static/js/main.b7f31b90.js.map",
+    "main.c97270a0.css.map": "/rutina-app/static/css/main.c97270a0.css.map",
+    "main.d7cde87c.js.map": "/rutina-app/static/js/main.d7cde87c.js.map",
     "977.992cdba6.chunk.js.map": "/rutina-app/static/js/977.992cdba6.chunk.js.map",
     "455.c21fddf9.chunk.js.map": "/rutina-app/static/js/455.c21fddf9.chunk.js.map",
     "488.01fc76c8.chunk.js.map": "/rutina-app/static/js/488.01fc76c8.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.9b53c249.css",
-    "static/js/main.b7f31b90.js"
+    "static/css/main.c97270a0.css",
+    "static/js/main.d7cde87c.js"
   ]
 }
