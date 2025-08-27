@@ -4,6 +4,10 @@ import html2canvas from "html2canvas";
 import "./App.css";
 import { motion } from "framer-motion";
 
+// import { useState } from "react";
+import { Menu } from "lucide-react";
+
+
 
 
 
@@ -112,8 +116,6 @@ const imagenes = {
   "Zancadas hacia atrás": `${process.env.PUBLIC_URL}/imagenes/Zancadas-hacia-atrás.webp`,  
   // Agrega más imágenes si es necesario
 };
-
-
 <img
   src="/tu-imagen.webp"
   alt="Imagen"
@@ -483,6 +485,8 @@ function App() {
   const [rutina, setRutina] = useState([]);
   const [pagoConfirmado, setPagoConfirmado] = useState(false);
 
+  const [menuOpen, setMenuOpen] = useState(false);// 👈 Estado del menú
+
   const toggleCompletado = (diaIndex, ejercicioIndex) => {
   setCompletados((prev) => ({
     ...prev,
@@ -588,116 +592,162 @@ function App() {
   };
 
   
-  
-return (
-  <div className={`App ${darkMode ? "dark" : ""}`}>
-    {/* 🔹 Header con botón de modo oscuro */}
-    <header className="header">
-      <h1>💪 Walking Fit</h1>
-      <p>Tu generador de rutinas personalizadas</p>
-      <button className="btn-darkmode" onClick={() => setDarkMode(!darkMode)}>
-        {darkMode ? "☀️ Claro" : "🌙 Oscuro"}
-      </button>
-    </header>
 
-    {/* FORMULARIO */}
-    <section className="formulario">
-      <select value={sexo} onChange={(e) => setSexo(e.target.value)}>
-        <option value="">Sexo</option>
-        <option value="mujer">Mujer</option>
-        <option value="hombre">Hombre</option>
-      </select>
-
-      <select value={objetivo} onChange={(e) => setObjetivo(e.target.value)}>
-        <option value="">Objetivo</option>
-        <option value="ganar masa">Ganar masa</option>
-        <option value="perder grasa">Perder grasa</option>
-      </select>
-
-      <select value={nivel} onChange={(e) => setNivel(e.target.value)}>
-        <option value="">Nivel</option>
-        <option value="principiante">Principiante</option>
-        <option value="intermedio">Intermedio</option>
-        <option value="avanzado">Avanzado</option>
-      </select>
-
-      <select value={dias} onChange={(e) => setDias(e.target.value)}>
-        <option value="">Días</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-      </select>
-
-      <select value={equipo} onChange={(e) => setEquipo(e.target.value)}>
-        <option value="">¿Tienes equipo?</option>
-        <option value="si">Sí</option>
-        <option value="no">No</option>
-      </select>
-
-      <button
-        className="btn-principal"
-        onClick={generarRutina}
-        disabled={!sexo || !objetivo || !nivel || !dias || !equipo}
-      >
-        🚀 Generar rutina
-      </button>
-    </section>
-
-    {/* MOSTRAR RUTINA */}
-    {rutina.length > 0 && (
-      <section className="rutina-section">
-        <h2>🏋️‍♂️ Tu rutina</h2>
-        <div id="rutina-pdf" className="rutina-container">
-          {rutina.map((dia, index) => (
-            <motion.div
-              key={index}
-              className="dia-card"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.2 }}
-            >
-              <h3>Día {index + 1}</h3>
-            <div className="ejercicios">
-              {dia.map((ejercicio, idx) => (
-                <motion.div
-                  key={idx}
-                  className={`ejercicio ${completados[`${index}-${idx}`] ? "completado" : ""}`}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.4, delay: idx * 0.1 }}
-                  onClick={() => toggleCompletado(index, idx)} // 👈 aquí marcamos el check
-                >
-                  <input
-                    type="checkbox"
-                    checked={!!completados[`${index}-${idx}`]}
-                    readOnly
-                  />
-                  <img
-                    src={imagenes[ejercicio] || "/imagenes/default.png"}
-                    alt={ejercicio}
-                    className="ejercicio-img"
-                  />
-                  <p>{ejercicio}</p>
-                </motion.div>
-              ))}
-            </div>
-
-            </motion.div>
-          ))}
-
-
+  return (
+    <div className={`App ${darkMode ? "dark" : ""}`}>
+      {/* 🔹 Header con botón de modo oscuro */}
+      <header className="header">
+        {/* Logo + Nombre (izquierda) */}
+        <div className="logo">
+          <img
+            src={`${process.env.PUBLIC_URL}/imagenes/marca.png`}
+            alt="Walking Fit Logo"
+            className="logo-img"
+          />
+          {/* <span className="logo-text">Walking Fit</span> */}
         </div>
 
-        <button className="btn-secundario" onClick={generarPDF}>
-          📄 Descargar PDF
+        {/* Menú (derecha con botones) */}
+        <nav className="menu">
+          <ul>
+            <li><a href="#personalizados">PERSONALIZADO</a></li>
+            <li><a href="#servicios">SERVICIOS</a></li>
+            <li><a href="#contacto">CONTACTENOS</a></li>
+          </ul>
+        </nav>
+      </header>
+          {/* <div>
+            <button className="btn-darkmode" onClick={() => setDarkMode(!darkMode)}>
+              {darkMode ? "☀️ Claro" : "🌙 Oscuro"}
+            </button>
+          </div> */}
+
+      {/* FORMULARIO */}
+      <section className="formulario">
+        <select value={sexo} onChange={(e) => setSexo(e.target.value)}>
+          <option value="">Sexo</option>
+          <option value="mujer">Mujer</option>
+          <option value="hombre">Hombre</option>
+        </select>
+
+        <select value={objetivo} onChange={(e) => setObjetivo(e.target.value)}>
+          <option value="">Objetivo</option>
+          <option value="ganar masa">Ganar masa</option>
+          <option value="perder grasa">Perder grasa</option>
+        </select>
+
+        <select value={nivel} onChange={(e) => setNivel(e.target.value)}>
+          <option value="">Nivel</option>
+          <option value="principiante">Principiante</option>
+          <option value="intermedio">Intermedio</option>
+          <option value="avanzado">Avanzado</option>
+        </select>
+
+        <select value={dias} onChange={(e) => setDias(e.target.value)}>
+          <option value="">Días</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+        </select>
+
+        <select value={equipo} onChange={(e) => setEquipo(e.target.value)}>
+          <option value="">¿Tienes equipo?</option>
+          <option value="si">Sí</option>
+          <option value="no">No</option>
+        </select>
+
+        <button
+          className="btn-principal"
+          onClick={generarRutina}
+          disabled={!sexo || !objetivo || !nivel || !dias || !equipo}
+        >
+          🚀 Generar rutina
         </button>
       </section>
-    )}
-  </div>
-);
+
+      {/* MOSTRAR RUTINA */}
+      {rutina.length > 0 && (
+        <section className="rutina-section">
+          <h2>🏋️‍♂️ Tu rutina</h2>
+          <div id="rutina-pdf" className="rutina-container">
+            {rutina.map((dia, index) => (
+              <motion.div
+                key={index}
+                className="dia-card"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.2 }}
+              >
+                <h3>Día {index + 1}</h3>
+              <div className="ejercicios">
+                {dia.map((ejercicio, idx) => (
+                  <motion.div
+                    key={idx}
+                    className={`ejercicio ${completados[`${index}-${idx}`] ? "completado" : ""}`}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.4, delay: idx * 0.1 }}
+                    onClick={() => toggleCompletado(index, idx)} // 👈 aquí marcamos el check
+                  >
+                    <input
+                      type="checkbox"
+                      checked={!!completados[`${index}-${idx}`]}
+                      readOnly
+                    />
+                    <img
+                      src={imagenes[ejercicio] || "/imagenes/default.png"}
+                      alt={ejercicio}
+                      className="ejercicio-img"
+                    />
+                    <p>{ejercicio}</p>
+                  </motion.div>
+                ))}
+              </div>
+
+              </motion.div>
+            ))}
+
+
+          </div>
+
+          <button className="btn-secundario" onClick={generarPDF}>
+            📄 Descargar PDF
+          </button>
+
+          
+
+        </section>
+        
+      )}
+
+      {/* NUEVA SECCIÓN PERFIL */}
+          <section className="perfil">
+            <div className="perfil-contenido">
+              {/* Columna izquierda */}
+              <div className="perfil-texto">
+                <h2>AURELIO</h2>
+                <p>
+                  Apasionado por el fitness y la tecnología. 
+                  Estoy desarrollando una app para rutinas personalizadas 
+                  que combinan entrenamiento con diseño moderno.
+                </p>
+                <button className="btn-quiensoy">
+                  Quien soy yo
+                </button>
+              </div>
+
+              {/* Columna derecha */}
+              <div className="perfil-foto">
+                <img src={`${process.env.PUBLIC_URL}/imagenes/edperfil3.png`} alt="EDGARD JORDAN" />
+              </div>
+            </div>
+          </section>
+    </div>
+    
+  );
 
 }
 

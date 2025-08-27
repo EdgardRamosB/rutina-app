@@ -20,12 +20,14 @@ body {
 .header {
   text-align: center;
   padding: 2rem;
-  background: linear-gradient(135deg, #3b82f6, #06b6d4); /* azul + celeste */
-  color: white;
-  border-bottom-left-radius: 16px;
-  border-bottom-right-radius: 16px;
+
+
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  position: sticky; /* se queda arriba al hacer scroll */
+  top: 0;
+  z-index: 1000;
 }
+
 
 .header h1 {
   margin: 0;
@@ -40,16 +42,17 @@ body {
 
 /* 🌙 Botón modo oscuro */
 .btn-darkmode {
-  margin-top: 1rem;
-  background: white;
-  color: #333333;
+  position: absolute;
+  left: 50%;       /* lo manda al centro horizontal */
+  /* transform: translateX(-50%); ajusta el centro exacto */
+  background: none;
   border: none;
-  padding: 0.6rem 1rem;
-  border-radius: 12px;
+  font-size: 20px;
   cursor: pointer;
-  font-weight: 600;
-  transition: all 0.2s ease;
+  margin: 0 20px; /* separa horizontalmente */
+  padding: 8px 12px; /* da más "botón real" */
 }
+
 .btn-darkmode:hover {
   transform: scale(1.05);
   background: #f1f5f9;
@@ -242,3 +245,147 @@ body {
 }
 
 
+/* Header base */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 40px;
+  background-color: white;
+  border-bottom: 1px solid #eaeaea;
+  font-family: 'Poppins', sans-serif; /* tipografía moderna */
+}
+
+/* Logo */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo-img {
+  width: 2.375rem;
+  height: 2.375rem;
+}
+
+
+.logo-text {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ecaf08;
+  letter-spacing: 0.5px;
+}
+
+/* Menú */
+.menu ul {
+  display: flex;
+  gap: 0.625rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.menu li {
+  margin: 0;
+}
+
+/* Botones estilo Nike compactos */
+.menu a {
+  text-decoration: none;
+  padding: 0.375rem 0.875rem;
+  /* border: 1px solid black; */
+  border-radius: 1.875rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #000000;
+  transition: all 0.2s ease-in-out;
+}
+
+
+.menu a:hover {
+  background-color: #e50914; /* rojo fuerte tipo Gymshark */
+  color: #fff;
+}
+
+.logo-img {
+  width: 60px;   /* antes 38px */
+  height: 75px;  /* antes 38px */
+}
+
+.perfil {
+  background-color: #000; /* Fondo negro */
+  color: #fff; /* Texto blanco */
+  padding: 60px 20px;
+}
+
+.perfil-contenido {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1100px;
+  margin: 0 auto;
+  gap: 40px;
+}
+
+.perfil-texto {
+  flex: 1;
+}
+
+.perfil-texto h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  position: relative;
+  display: inline-block;
+}
+
+.perfil-texto h2::after {
+  content: "";
+  display: block;
+  width: 250px; /* largo de la línea amarilla */
+  height: 3px;
+  background-color: #FFD700; /* Amarillo */
+  margin-top: 5px;
+}
+
+.perfil-texto p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  max-width: 500px;
+}
+
+.perfil-foto {
+  flex: 1;
+  text-align: center;
+}
+
+.perfil-foto img {
+  max-width: 100%;
+  width: 18.75rem;
+  height: auto;
+  border-radius: 0.75rem;
+  box-shadow: 0.625rem 0.25rem 0.625rem rgba(255, 215, 0, 0.4);
+}
+
+
+.btn-quiensoy {
+  background: linear-gradient(135deg, #facc15, #f59e0b); /* degradado dorado */
+  color: #111; /* texto oscuro */
+  font-size: 1.1rem; /* tamaño de fuente */
+  font-weight: 600;
+  padding: 0.75rem 1.75rem; /* espacio interno */
+  border: none;
+  border-radius: 9999px; /* pill redondeado */
+  cursor: pointer;
+  box-shadow: 0 0.25rem 0.75rem rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+}
+
+.btn-quiensoy:hover {
+  background: linear-gradient(135deg, #fbbf24, #d97706); /* hover más intenso */
+  transform: scale(1.07);
+  box-shadow: 0 0.4rem 1rem rgba(0,0,0,0.4);
+}
+
+.btn-quiensoy:active {
+  transform: sca
+}
