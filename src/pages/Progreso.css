@@ -1,0 +1,102 @@
+.progreso-container {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.titulo {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  color: #2c3e50;
+}
+
+.card {
+  background: #fff;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.card h3 {
+  margin-bottom: 15px;
+  color: #34495e;
+}
+
+.card input {
+  width: calc(50% - 12px);
+  padding: 10px;
+  margin: 6px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  transition: border-color 0.2s ease;
+}
+
+.card input:focus {
+  border-color: #3498db;
+  outline: none;
+}
+
+.card button {
+  display: inline-block;
+  background: #3498db;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: bold;
+  padding: 10px 16px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.card button:hover {
+  background: #2980b9;
+}
+
+.tabla-progreso {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.tabla-progreso th,
+.tabla-progreso td {
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+.tabla-progreso th {
+  background: #3498db;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.tabla-progreso tr:nth-child(even) {
+  background: #f2f6fc;
+}
+
+.btn-eliminar {
+  background: #e74c3c;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: background 0.3s ease;
+}
+
+.btn-eliminar:hover {
+  background: #c0392b;
+}
