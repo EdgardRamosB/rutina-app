@@ -1,0 +1,138 @@
+/* Contenedor principal */
+#contactanos {
+  padding: 60px 20px;
+  background: #111827; /* gris oscuro casi negro */
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  color: #f3f4f6; /* texto claro */
+}
+
+/* Caja central */
+#contactanos .max-w-5xl {
+  background: #1f2937; /* gris oscuro */
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+}
+
+/* Títulos */
+#contactanos h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  color: #f9fafb;
+}
+
+#contactanos p {
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+  color: #d1d5db;
+}
+
+/* Formulario */
+#contactanos form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+#contactanos input,
+#contactanos textarea {
+  padding: 12px;
+  border: 1px solid #374151;
+  border-radius: 8px;
+  font-size: 1rem;
+  width: 100%;
+  background: #111827; /* fondo oscuro */
+  color: #f3f4f6;
+  transition: border 0.3s ease, background 0.3s ease;
+}
+
+#contactanos input:focus,
+#contactanos textarea:focus {
+  border-color: #4f46e5; /* Indigo */
+  outline: none;
+  background: #1f2937;
+}
+
+/* Botón */
+#contactanos button {
+  background: #4f46e5; /* Indigo */
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+#contactanos button:hover {
+  background: #4338ca; /* Indigo más oscuro */
+  transform: scale(1.05);
+}
+
+/* Links de contacto */
+#contactanos .grid a {
+  font-size: 1rem;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #d1d5db;
+  transition: color 0.3s;
+}
+
+#contactanos .grid a:hover {
+  color: #4f46e5; /* Indigo */
+}
+
+/* Redes sociales */
+#contactanos .flex a {
+  font-size: 1.4rem;
+  transition: transform 0.2s, color 0.3s;
+}
+
+#contactanos .flex a:hover {
+  transform: scale(1.2);
+  color: #4f46e5;
+}
+
+
+/* Fondo con imagen fitness */
+#contactanos {
+  padding: 60px 20px;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #f3f4f6;
+  background: url("/public/imagenes/silueta-fitness.png") no-repeat center center/cover;
+  background-blend-mode: overlay; /* mezcla elegante */
+  position: relative;
+}
+
+/* Oscurecer un poco la silueta si es necesario */
+#contactanos::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at center, 
+    rgba(0, 0, 0, 0.2) 0%,   /* centro claro */
+    rgba(0, 0, 0, 0.5) 90%,  /* intermedio */
+    rgba(0, 0, 0, 0.7) 100%  /* bordes oscuros */
+  );
+  z-index: 0;
+}
+
+
+/* Caja central */
+#contactanos .max-w-5xl {
+  background: rgba(17, 24, 39, 0.9);
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+  position: relative;
+  z-index: 1;
+}

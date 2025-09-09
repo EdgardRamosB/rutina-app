@@ -326,7 +326,7 @@ body {
 }
 
 .perfil-texto {
-  flex: 1;
+  /* flex: 1; */
 }
 
 .perfil-texto h2 {
@@ -334,6 +334,13 @@ body {
   margin-bottom: 10px;
   position: relative;
   display: inline-block;
+}
+
+.perfil-texto h3 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  position: relative;
+
 }
 
 .perfil-texto h2::after {

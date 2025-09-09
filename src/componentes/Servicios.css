@@ -1,0 +1,85 @@
+/* src/componentes/Servicios.css */
+
+#servicios {
+  background: linear-gradient(to bottom right, #f8fafc, #eef2ff);
+  padding: 4rem 1rem;
+}
+
+#servicios h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+#servicios p {
+  color: #6b7280;
+  max-width: 700px;
+  margin: 0 auto 3rem auto;
+  font-size: 1.1rem;
+}
+
+/* Tarjetas de servicios */
+.servicio-card {
+  background: white;
+  border-radius: 1.25rem;
+  padding: 2rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+}
+
+.servicio-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 8px 20px rgba(79, 70, 229, 0.2);
+  border-color: #6366f1;
+}
+
+.servicio-card h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 0.75rem;
+}
+
+.servicio-card p {
+  color: #4b5563;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* Íconos */
+.servicio-card svg {
+  width: 3rem;
+  height: 3rem;
+  color: #6366f1;
+  margin-bottom: 1rem;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.servicio-card:hover svg {
+  transform: rotate(-5deg) scale(1.1);
+  color: #4f46e5;
+}
+
+#servicios h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: center;   /* ✅ Centra el título */
+}
+
+#servicios p {
+  color: #6b7280;
+  max-width: 700px;
+  margin: 0 auto 3rem auto; /* ✅ Auto a los lados lo centra */
+  font-size: 1.1rem;
+  text-align: center;   /* ✅ Centra el párrafo */
+}

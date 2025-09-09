@@ -259,8 +259,8 @@ const Progreso = () => {
         {/* Pesos dinámicos */}
         <div className="peso-dinamico">
           <input
-            type="number"
-            placeholder="Peso en kg"
+            type="text"
+            placeholder="Peso y repeticiones (ej: 80kg x 12 reps)"
             value={peso}
             onChange={(e) => setPeso(e.target.value)}
           />
@@ -271,7 +271,7 @@ const Progreso = () => {
         <ul>
           {listaPesos.map((p, i) => (
             <li key={i}>
-              {p} kg
+              {p} Reps
               <button onClick={() => eliminarPeso(i)}>❌</button>
             </li>
           ))}
@@ -301,7 +301,13 @@ const Progreso = () => {
                 <td>{p.fecha}</td>
                 <td>{p.rutina}</td>
                 <td>{p.series}</td>
-                <td>{p.peso}</td>
+                <td>
+                    {p.peso
+                      .split("-")        // separamos cada serie por "-"
+                      .map((serie, idx) => (
+                        <div key={idx}>{serie.trim()}</div> // cada una en una línea
+                      ))}
+                </td>
                 <td>
                   <button
                     className="btn-eliminar"

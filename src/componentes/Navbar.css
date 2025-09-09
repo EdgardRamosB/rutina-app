@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+.navbar {
+  font-family: 'Montserrat', sans-serif;
+}
+
+
+.nav-links li a {
+  font-size: 0.80rem;
+  font-weight: 750;
+  border-radius: 1.875rem;
+  padding: 0.375rem 0.875rem;
+  color: #000;
+  text-decoration: none;
+   text-transform: uppercase; /* <- esto hace que todo sea mayúsculas */
+  transition: color 0.2s ease-in-out, background 0.2s ease-in-out;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.nav-links li a:hover {
+  color: #ffffff; 
+  background: rgb(250, 3, 3); /* efecto suave sin borrosidad */
+}
+
+
+
+
+
+
+/* Estilos base COLOR DE FONDO VAR*/
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  background: #f7f7f7;
+  color: rgb(0, 0, 0);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo img {
+  height: 90px;  /* tamaño fijo del logo */
+  width: auto;
+}
+
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+
+  transition: all 0.3s ease;
+}
+
+/* .nav-links li a {
+  color: #000000;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.3s;
+}
+
+.nav-links li a:hover {
+  color: #f39c12;
+} */
+
+/* Botón hamburguesa */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+}
+
+/* COLOR DE LA HAMBURGUESA 3 LINEAS */
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background: rgba(223, 130, 9, 0.925);
+  transition: 0.3s;
+  border-radius: 5px;
+}
+
+/* Estado activo del hamburguesa 
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translateY(8px);
+}
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translateY(-8px);
+}
+*/
+/* Responsive */
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+
+  /* COLOR DE LA CAJA DESPLEGABLE */
+  .nav-links {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background: hsl(0, 0%, 100%);
+    flex-direction: column;
+    width: 200px;
+    height: 0;
+    overflow: hidden;
+    gap: 15px;
+    padding: 0;
+  }
+
+  .nav-links.open {
+    height: auto;
+    padding: 20px;
+  }
+
+  .logo img {
+  height: 50px;  /* ajusta el tamaño */
+  width: auto;
+}
+}
