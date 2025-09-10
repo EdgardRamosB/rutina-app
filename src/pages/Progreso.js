@@ -37,6 +37,7 @@ const ejercicios = {
     "Press Hammer",
     "Press militar parado/ barra",
     "Elevaciones laterales",
+    "elevaciones laterales con mancuerna",
     "Elevaciones laterales sentado",
     "Press Arnold",
     "Pajaros con mancuernas en banco",
@@ -95,6 +96,8 @@ const ejercicios = {
     "Prensa",
     "zancadas",
     "Zancada con mancuerna",
+    "Zancadas laterales",
+    "Sentadillas con salto",
   ],
   Femoral: [
     "Curl femoral sentado",
@@ -106,6 +109,7 @@ const ejercicios = {
   Abdomen: [
     "Abdominales básicos",
     "Crunch bicicleta",
+    "Plancha frontal",
   ],
   Pantorrillas: [
     "elevaciones de talones",
