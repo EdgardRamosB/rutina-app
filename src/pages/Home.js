@@ -9,7 +9,7 @@ function Home() {
         <div className="perfil-contenido">
           <div className="perfil-texto">
             <h2>EDGARD</h2>
-            <h3>Entrenamiento natural y efectivo
+            <h3>EENTRENAMIENTO NATURAL Y EFECTIVO
             </h3>
             <p>
               Apasionado por el fitness y la tecnología. Estoy desarrollando una app para rutinas
@@ -32,14 +32,18 @@ function Home() {
               A través de mi propia experiencia puedo decirte que un cambio es posible, solo tienes
               que desearlo, proponértelo y lo conseguirás.
               <br />
+              <br />
               Con mi ayuda no te resultará difícil, te demostraré que puedes hacerlo sin sufrimiento,
               solo con voluntad y decisión.
+              <br />
               <br />
               La combinación de dieta y ejercicio es fundamental para conseguir el cuerpo deseado de
               forma saludable.
               <br />
+              <br />
               Si has llegado hasta aquí ya has dado el primer paso, el más importante. ¡Ánimo! Esto
               no ha hecho más que empezar.
+              <br />
             </p>
           </div>
           <div className="perfil-foto-derecha">
@@ -61,21 +65,25 @@ function Home() {
               Yo personalmente me encargo de tu transformación, tanto en las rutinas como en la
               dieta.
               <br />
+              <br />
               Aprenderás a hacer tus propias dietas, comiendo equilibradamente y sin restricciones.
+              <br />
               <br />
               Te haré un seguimiento durante el tiempo que dure tu entrenamiento que consistirá en
               evaluar tus ejercicios para realizarlos correctamente, con seguridad y de forma
               efectiva para obtener los mejores resultados.
               <br />
+              <br />
               Conseguirás:
             </p>
-            <ul>
-              <li>Pérdida de peso / volumen</li>
-              <li>Tonificar y esculpir tu cuerpo</li>
-              <li>Resistencia</li>
-              <li>Movilidad / Flexibilidad</li>
-              <li>Alimentación equilibrada</li>
-            </ul>
+          <ul className="beneficios-lista">
+            <li>Pérdida de peso / volumen</li>
+            <li>Tonificar y esculpir tu cuerpo</li>
+            <li>Resistencia</li>
+            <li>Movilidad / Flexibilidad</li>
+            <li>Alimentación equilibrada</li>
+          </ul>
+
           </div>
 
           </div>

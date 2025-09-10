@@ -283,6 +283,7 @@ const Progreso = () => {
       {/* 📊 Resultados */}
       <div className="card">
         <h3>📊 Progresos Ingresados</h3>
+        
         <table className="tabla-progreso">
           <thead>
             <tr>

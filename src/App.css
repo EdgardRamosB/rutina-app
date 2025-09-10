@@ -115,9 +115,12 @@ body {
 
 /* 🏋️ Rutina */
 .rutina-section {
-  text-align: center;
-  margin: 2rem auto;
-  max-width: 900px;
+  background-image: url('/public/imagenes/fondo.jpg'); /* ruta de tu imagen */
+  background-size: cover; /* que cubra todo el contenedor */
+  background-position: center; /* centrada */
+  background-repeat: no-repeat; /* que no se repita */
+  padding: 20px;
+  border-radius: 15px; /* opcional, para bordes redondeados */
 }
 
 /* 📅 Día */
@@ -338,6 +341,7 @@ body {
 
 .perfil-texto h3 {
   font-size: 2rem;
+  margin-top: 10px;
   margin-bottom: 10px;
   position: relative;
 
@@ -510,3 +514,83 @@ body {
 }
 
 
+
+.beneficios-lista {
+  list-style: none; /* quitar viñetas predeterminadas */
+  padding-left: 0;
+  margin-left: 0;
+}
+
+.beneficios-lista li {
+  position: relative;
+  padding-left: 2rem; /* espacio para el símbolo */
+  margin-bottom: 0.7rem; /* espacio entre líneas */
+  font-weight: 500;
+  font-size: 1rem; 
+  color: #333;
+  line-height: 1.5;
+  transition: color 0.3s;
+}
+
+/* Símbolo >> antes de cada li */
+.beneficios-lista li::before {
+  content: '>>';
+  position: absolute;
+  left: 0;
+  color: #f39c12; /* color del símbolo */
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+
+
+/* Tablets */
+@media screen and (max-width: 1024px) {
+  .perfil-contenido,
+  .perfil-contenido-cambio,
+  .perfil3-contenido-cambio {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .perfil-texto, .perfil-texto-cambio, .perfil3-texto-cambio,
+  .perfil-foto, .perfil-foto-derecha, .perfil3-foto-izquierda {
+    flex: unset;
+    width: 100%;
+  }
+
+  .perfil-texto h2, .perfil-texto-cambio h2, .perfil3-texto-cambio h2 {
+    font-size: 1.75rem;
+  }
+
+  .perfil-texto h3 {
+    font-size: 1.1rem;
+  }
+
+  .perfil-texto p, .perfil-texto-cambio p, .perfil3-texto-cambio p {
+    font-size: 0.95rem;
+  }
+}
+
+/* Móviles */
+@media screen and (max-width: 768px) {
+  .perfil, .perfil2, .perfil3 {
+    padding: 2rem 1rem;
+  }
+
+  .perfil-texto h2, .perfil-texto-cambio h2, .perfil3-texto-cambio h2 {
+    font-size: 1.5rem;
+  }
+
+  .perfil-texto h3 {
+    font-size: 1rem;
+  }
+
+  .perfil-texto p, .perfil-texto-cambio p, .perfil3-texto-cambio p {
+    font-size: 0.9rem;
+  }
+
+  .btn-quiensoy {
+    width: 100%;
+  }
+}

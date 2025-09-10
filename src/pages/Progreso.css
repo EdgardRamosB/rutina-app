@@ -1,11 +1,44 @@
 .progreso-container {
   max-width: 900px;
+  width: 90%; /* Se ajusta al ancho de la pantalla */
   margin: 30px auto;
   padding: 20px;
   background: #f8f9fa;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  box-sizing: border-box; /* importante para que padding no haga overflow */
+}
+
+.card input {
+  width: 100%; /* Ocupa todo el ancho en pantallas pequeñas */
+  margin: 6px 0;
+}
+
+.tabla-progreso {
+  width: 100%;
+  overflow-x: auto; /* Scroll horizontal si es necesario */
+  display: block;
+}
+
+@media (min-width: 600px) {
+  .card input {
+    width: calc(50% - 12px); /* Dos inputs por fila en pantallas medianas y grandes */
+    margin: 6px;
+  }
+}
+
+
+.card input {
+  width: 100%; /* Cambia del 50% a 100% en móviles */
+  margin: 6px 0;
+}
+
+
+.tabla-progreso {
+  width: 100%;
+  overflow-x: auto; /* Permite scroll horizontal si es necesario */
+  display: block;
 }
 
 .titulo {
@@ -99,4 +132,11 @@
 
 .btn-eliminar:hover {
   background: #c0392b;
+}
+
+@media (min-width: 600px) {
+  .card input {
+    width: calc(50% - 12px); /* Mantiene dos inputs por fila en pantallas grandes */
+    margin: 6px;
+  }
 }
