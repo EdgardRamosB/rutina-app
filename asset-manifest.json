@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/rutina-app/static/css/main.4ff54f5e.css",
-    "main.js": "/rutina-app/static/js/main.8b40b1a3.js",
+    "main.js": "/rutina-app/static/js/main.30cdb583.js",
     "static/js/977.992cdba6.chunk.js": "/rutina-app/static/js/977.992cdba6.chunk.js",
     "static/js/455.c21fddf9.chunk.js": "/rutina-app/static/js/455.c21fddf9.chunk.js",
     "static/js/488.01fc76c8.chunk.js": "/rutina-app/static/js/488.01fc76c8.chunk.js",
@@ -9,13 +9,13 @@
     "static/media/silueta-fitness.png": "/rutina-app/static/media/silueta-fitness.3b762637b787b9836bcd.png",
     "index.html": "/rutina-app/index.html",
     "main.4ff54f5e.css.map": "/rutina-app/static/css/main.4ff54f5e.css.map",
-    "main.8b40b1a3.js.map": "/rutina-app/static/js/main.8b40b1a3.js.map",
+    "main.30cdb583.js.map": "/rutina-app/static/js/main.30cdb583.js.map",
     "977.992cdba6.chunk.js.map": "/rutina-app/static/js/977.992cdba6.chunk.js.map",
     "455.c21fddf9.chunk.js.map": "/rutina-app/static/js/455.c21fddf9.chunk.js.map",
     "488.01fc76c8.chunk.js.map": "/rutina-app/static/js/488.01fc76c8.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.4ff54f5e.css",
-    "static/js/main.8b40b1a3.js"
+    "static/js/main.30cdb583.js"
   ]
 }
