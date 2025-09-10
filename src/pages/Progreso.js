@@ -12,6 +12,7 @@ const ejercicios = {
     "Press plano en maquina",
     "Cruces en polea alta",
     "Cruces en polea baja",
+    "Flexiones",
     "Flexiones de brazos en pared",
     "Flexiones Brazos con Rodillas",
     "Flexiones Inclinadas",
@@ -27,6 +28,7 @@ const ejercicios = {
     "Dominadas Supinas Cerradas",
     "Press de Banca Inclinado",
     "Press de Banca Declinado",
+    "Plancha lateral",
     "Aperturas en banca",
   ],
   Hombros: [
@@ -83,6 +85,7 @@ const ejercicios = {
     "jalon polea frontal / agarre cerrado",
     "Pull over",
     "Remo con mancuerna / Serrucho",
+    "Superman",
   ],
   Cuadriceps: [
     "Sentadilla",
@@ -90,6 +93,7 @@ const ejercicios = {
     "Sentadilla frontal",
     "Hack Squat",
     "Prensa",
+    "zancadas",
     "Zancada con mancuerna",
   ],
   Femoral: [
@@ -98,6 +102,13 @@ const ejercicios = {
     "Curl de biceps femoral de pie",
     "Peso muerto rumano con mancuernas / Isquiotibiales",
     "Sentadilla sumo",
+  ],
+  Abdomen: [
+    "Abdominales básicos",
+    "Crunch bicicleta",
+  ],
+  Pantorrillas: [
+    "elevaciones de talones",
   ],
   Gluteos: [
     "Step up",
@@ -109,7 +120,9 @@ const ejercicios = {
     "Puente gluteo",
     "Aductores",
     "Patada Sprinter",
+    "Puente de gluteo",
     "Peso muerto rumano con barra",
+    "Patadas traseras",
   ],
 };
 
