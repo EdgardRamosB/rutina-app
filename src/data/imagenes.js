@@ -73,7 +73,7 @@ const imagenes = {
   "Superman": `${process.env.PUBLIC_URL}/imagenes/Superman.webp`,
   "Sentadillas con salto": `${process.env.PUBLIC_URL}/imagenes/Sentadillas-con-salto.webp`,
   "Elevaciones laterales de pierna": `${process.env.PUBLIC_URL}/imagenes/Elevaciones-laterales-de-pierna.webp`, 
-  "Crunch": `${process.env.PUBLIC_URL}/imagenes/Crunch.webp`,  
+  "Crunch bicicleta": `${process.env.PUBLIC_URL}/imagenes/Crunch.webp`,  
   "Plancha lateral": `${process.env.PUBLIC_URL}/imagenes/Plancha-lateral2.webp`,  
   "Plancha frontal": `${process.env.PUBLIC_URL}/imagenes/Plancha-frontal.webp`,
   "Zancadas laterales": `${process.env.PUBLIC_URL}/imagenes/Zancadas-laterales.webp`,  

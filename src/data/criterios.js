@@ -267,26 +267,26 @@ const criteriosMujerPrincipianteGanarMasaSinEquipo = {
   3: [
     ["sentadilla", "puente de gluteo", "zancadas", "flexiones"],
     ["elevaciones de talones", "Patadas traseras", "Abdominales básicos", "Superman"],
-    ["Sentadillas con salto", "Elevaciones laterales de pierna", "Crunch", "Plancha lateral"]
+    ["Sentadillas con salto", "Elevaciones laterales de pierna", "Crunch bicicleta", "Plancha lateral"]
   ],
   4: [
     ["sentadilla", "puente de gluteo", "zancadas", "flexiones"],
     ["elevaciones de talones", "Abdominales básicos", "Superman", "Plancha frontal"],
-    ["Zancadas laterales", "Patadas traseras", "Crunch", "Plancha lateral"],
+    ["Zancadas laterales", "Patadas traseras", "Crunch bicicleta", "Plancha lateral"],
     ["Sentadillas con salto", "Elevaciones laterales de pierna", "puente de gluteo", "flexiones"]
   ],
   5: [
     ["sentadilla", "puente de gluteo", "zancadas", "Plancha lateral"],
     ["Abdominales básicos", "Patadas traseras", "Superman", "flexiones"],
-    ["Zancadas laterales", "Crunch", "puente de gluteo", "elevaciones de talones"],
+    ["Zancadas laterales", "Crunch bicicleta", "puente de gluteo", "elevaciones de talones"],
     ["Sentadillas con salto", "Plancha frontal", "elevaciones laterales con mancuerna", "Abdominales básicos"],
     ["zancadas", "puente de gluteo", "Plancha lateral", "Superman"]
   ],
   6: [
     ["sentadilla", "puente de gluteo", "Abdominales básicos", "flexiones"],
-    ["zancadas", "Crunch", "Plancha lateral", "elevaciones de talones"],
+    ["zancadas", "Crunch bicicleta", "Plancha lateral", "elevaciones de talones"],
     ["Patadas traseras", "Superman", "puente de gluteo", "flexiones"],
-    ["Zancadas laterales", "Plancha frontal", "Crunch", "Sentadillas con salto"],
+    ["Zancadas laterales", "Plancha frontal", "Crunch bicicleta", "Sentadillas con salto"],
     ["elevaciones laterales con mancuerna", "puente de gluteo", "Plancha lateral", "Abdominales básicos"],
     ["Sentadilla", "Plancha frontal", "Superman", "elevaciones de talones"]
   ]

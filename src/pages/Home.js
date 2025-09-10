@@ -20,7 +20,16 @@ function Home() {
           <div className="perfil-foto">
             <img src={`${process.env.PUBLIC_URL}/imagenes/edperfil3.png`} alt="EDGARD JORDAN" />
           </div>
+                  <a
+          href="https://wa.me/51960225690" // Reemplaza con tu número con código de país (ej: Perú: 51)
+          className="whatsapp-button"
+          target="_blank"
+          rel="noopener noreferrer">
+          <img src={`${process.env.PUBLIC_URL}/whatsapp-icon.png`} alt="WhatsApp" />
+        </a>
         </div>
+
+
       </section>
 
       {/* PERFIL 2 */}
