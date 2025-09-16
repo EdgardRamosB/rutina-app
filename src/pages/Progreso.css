@@ -140,3 +140,10 @@
     margin: 6px;
   }
 }
+
+/* al final de Progreso.css */
+.progreso-container .card { margin-bottom: 16px; }
+@media (max-width: 600px) {
+  .peso-dinamico { display: flex; flex-direction: column; gap: 8px; }
+  .peso-dinamico input { width: 100%; }
+}
