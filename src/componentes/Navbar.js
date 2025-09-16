@@ -12,7 +12,7 @@ function Navbar() {
         src={`${process.env.PUBLIC_URL}/imagenes/marca.png`} 
         alt="Walking Fit Logo" 
         />
-      </div>
+        </div>
 
       {/* Botón hamburguesa */}
       <div className={`hamburger ${open ? "active" : ""}`} onClick={() => setOpen(!open)}>
