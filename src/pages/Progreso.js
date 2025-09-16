@@ -164,6 +164,10 @@ const Progreso = () => {
   const [peso, setPeso] = useState("");
   const [listaPesos, setListaPesos] = useState([]);
   const [progresos, setProgresos] = useState([]);
+  
+  // Agregar un estado para guardar el ejercicio seleccionado
+  const [selectedExercise, setSelectedExercise] = useState("");
+
 
   // Para el gráfico
   const [filtroEjercicio, setFiltroEjercicio] = useState(""); // ejercicio que vamos a graficar
@@ -270,6 +274,12 @@ const Progreso = () => {
 
   // Lista de ejercicios disponibles dentro de los progresos del usuario
   const ejerciciosDisponibles = [...new Set(progresos.map((p) => p.rutina).filter(Boolean))];
+
+     // filtrar los progreoss ingresados
+    const progresosFiltrados = selectedExercise
+      ? progresos.filter((p) => p.rutina === selectedExercise)
+      : progresos;
+
 
   return (
     <div className="progreso-container">
@@ -391,6 +401,23 @@ const Progreso = () => {
         )}
       </div>
 
+      {/* codigo para filtrar los progresos */}
+        <div>
+            <label>Filtrar por ejercicio: </label>
+            <select
+              value={selectedExercise}
+              onChange={(e) => setSelectedExercise(e.target.value)}
+            >
+              <option value="">Todos</option>
+              {Object.values(ejercicios).flat().map((ej, index) => (
+                <option key={index} value={ej}>
+                  {ej}
+                </option>
+              ))}
+            </select>
+        </div>
+
+
       {/* Resultados en tabla */}
       <div className="card">
         <h3>📊 Progresos Ingresados</h3>
@@ -407,7 +434,7 @@ const Progreso = () => {
             </tr>
           </thead>
           <tbody>
-            {progresos.map((p) => (
+            {progresosFiltrados.map((p) => (
               <tr key={p.id}>
                 <td>{p.dni}</td>
                 <td>{new Date(p.fecha).toLocaleDateString("es-PE")}</td>
