@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/rutina-app/static/css/main.4ff54f5e.css",
-    "main.js": "/rutina-app/static/js/main.442dd0e5.js",
-    "static/js/977.992cdba6.chunk.js": "/rutina-app/static/js/977.992cdba6.chunk.js",
-    "static/js/455.c21fddf9.chunk.js": "/rutina-app/static/js/455.c21fddf9.chunk.js",
-    "static/js/488.01fc76c8.chunk.js": "/rutina-app/static/js/488.01fc76c8.chunk.js",
-    "static/media/fondo.jpg": "/rutina-app/static/media/fondo.b8ac46ad17a961c39254.jpg",
-    "static/media/silueta-fitness.png": "/rutina-app/static/media/silueta-fitness.3b762637b787b9836bcd.png",
-    "index.html": "/rutina-app/index.html",
-    "main.4ff54f5e.css.map": "/rutina-app/static/css/main.4ff54f5e.css.map",
-    "main.442dd0e5.js.map": "/rutina-app/static/js/main.442dd0e5.js.map",
-    "977.992cdba6.chunk.js.map": "/rutina-app/static/js/977.992cdba6.chunk.js.map",
-    "455.c21fddf9.chunk.js.map": "/rutina-app/static/js/455.c21fddf9.chunk.js.map",
-    "488.01fc76c8.chunk.js.map": "/rutina-app/static/js/488.01fc76c8.chunk.js.map"
+    "main.css": "/static/css/main.2ef842f3.css",
+    "main.js": "/static/js/main.9ca17a03.js",
+    "static/js/977.992cdba6.chunk.js": "/static/js/977.992cdba6.chunk.js",
+    "static/js/455.c21fddf9.chunk.js": "/static/js/455.c21fddf9.chunk.js",
+    "static/js/488.01fc76c8.chunk.js": "/static/js/488.01fc76c8.chunk.js",
+    "static/media/fondo.jpg": "/static/media/fondo.b8ac46ad17a961c39254.jpg",
+    "static/media/silueta-fitness.png": "/static/media/silueta-fitness.3b762637b787b9836bcd.png",
+    "index.html": "/index.html",
+    "main.2ef842f3.css.map": "/static/css/main.2ef842f3.css.map",
+    "main.9ca17a03.js.map": "/static/js/main.9ca17a03.js.map",
+    "977.992cdba6.chunk.js.map": "/static/js/977.992cdba6.chunk.js.map",
+    "455.c21fddf9.chunk.js.map": "/static/js/455.c21fddf9.chunk.js.map",
+    "488.01fc76c8.chunk.js.map": "/static/js/488.01fc76c8.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.4ff54f5e.css",
-    "static/js/main.442dd0e5.js"
+    "static/css/main.2ef842f3.css",
+    "static/js/main.9ca17a03.js"
   ]
 }
