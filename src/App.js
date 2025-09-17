@@ -18,12 +18,19 @@ export default function App() {
     <Router>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Navigate to="/rutina-app" />} />
-        <Route path="/rutina-app" element={<Home />} />
+        {/* Home directo */}
+        <Route path="/" element={<Home />} />
+        
+        {/* Solo en GitHub Pages se accede también por /rutina-app */}
+        {isGitHubPages && <Route path="/rutina-app" element={<Home />} />}
+
         <Route path="/progreso" element={<Progreso />} />
         <Route path="/contactanos" element={<Contactanos />} />
         <Route path="/servicios" element={<Servicios />} />
         <Route path="/personalizado" element={<Personalizado />} />
+
+        {/* Catch-all: redirige a Home */}
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Router>
   );

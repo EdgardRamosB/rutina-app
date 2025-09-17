@@ -2,7 +2,7 @@
   "name": "rutina-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://edgardramosb.github.io/rutina-app/",
+  "homepage": ".",
   "dependencies": {
     "@supabase/supabase-js": "^2.57.2",
     "firebase": "^12.2.1",
