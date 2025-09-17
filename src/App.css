@@ -501,7 +501,7 @@ body {
 .perfil3-foto-izquierda {
   flex: 1;
   text-align: center;
-  background-color: #ffffff;
+  background-color: #000000;
   border-radius: 0.75rem;
 }
 

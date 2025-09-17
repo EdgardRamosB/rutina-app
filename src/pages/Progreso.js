@@ -104,6 +104,7 @@ const ejercicios = {
     "Sentadilla frontal",
     "Hack Squat",
     "Prensa",
+    "Prensa a una pierna",
     "zancadas",
     "Zancada con mancuerna",
     "Zancadas laterales",
@@ -131,6 +132,7 @@ const ejercicios = {
     "Puente de gluteo",
     "Peso muerto rumano con barra",
     "Patadas traseras",
+    "zancadas en smith con deficit",
   ],
 };
 
@@ -166,7 +168,7 @@ const Progreso = () => {
   const [progresos, setProgresos] = useState([]);
   
   // Agregar un estado para guardar el ejercicio seleccionado
-  const [selectedExercise, setSelectedExercise] = useState("");
+  // const [selectedExercise, setSelectedExercise] = useState("");
 
 
   // Para el gráfico
@@ -206,7 +208,8 @@ const Progreso = () => {
     setListaPesos(listaPesos.filter((_, i) => i !== index));
   };
 
-  // Agregar progreso
+
+    // Agregar progreso
   const handleAgregar = async () => {
     if (!dni || !fecha || !rutina || !series || listaPesos.length === 0) {
       alert("Por favor, completa todos los campos.");
@@ -218,7 +221,7 @@ const Progreso = () => {
       .insert([
         {
           dni,
-          fecha,
+          fecha: fecha, // 👉 Guardar directamente como texto
           rutina,
           series,
           peso: listaPesos.join(" - "),
@@ -229,11 +232,8 @@ const Progreso = () => {
     if (error) {
       console.error("Error insertando:", error.message);
     } else {
-      // actualizar lista localmente
       setProgresos((prev) => [...prev, ...data]);
-      // si no hay filtro seleccionado, seleccionar la rutina recién agregada
       if (!filtroEjercicio) setFiltroEjercicio(data[0]?.rutina || "");
-      // limpiar formulario
       setFecha("");
       setCategoria("");
       setRutina("");
@@ -241,6 +241,9 @@ const Progreso = () => {
       setListaPesos([]);
     }
   };
+
+
+
 
   // Eliminar progreso
   const handleEliminar = async (id) => {
@@ -262,12 +265,14 @@ const Progreso = () => {
   }, [progresos, filtroEjercicio]);
 
   // Preparar datos para el gráfico: ordenar por fecha y mapear a {fecha, peso}
+  // En el gráfico, evita crear Date directo
   const dataGrafico = progresos
     .filter((p) => (filtroEjercicio ? p.rutina === filtroEjercicio : true))
-    .slice() // crear copia
-    .sort((a, b) => new Date(a.fecha) - new Date(b.fecha))
+    .slice()
+    .sort((a, b) => a.fecha.localeCompare(b.fecha)) // ordenar como string YYYY-MM-DD
     .map((p) => ({
-      fecha: new Date(p.fecha).toLocaleDateString("es-PE"),
+      // usamos directamente la fecha guardada
+      fecha: p.fecha, 
       peso: obtenerPesoMaximo(p.peso),
     }))
     .filter((d) => d.peso > 0); // quitar registros sin datos de peso
@@ -276,8 +281,8 @@ const Progreso = () => {
   const ejerciciosDisponibles = [...new Set(progresos.map((p) => p.rutina).filter(Boolean))];
 
      // filtrar los progreoss ingresados
-    const progresosFiltrados = selectedExercise
-      ? progresos.filter((p) => p.rutina === selectedExercise)
+    const progresosFiltrados = filtroEjercicio
+      ? progresos.filter((p) => p.rutina === filtroEjercicio)
       : progresos;
 
 
@@ -402,20 +407,21 @@ const Progreso = () => {
       </div>
 
       {/* codigo para filtrar los progresos */}
-        <div>
-            <label>Filtrar por ejercicio: </label>
-            <select
-              value={selectedExercise}
-              onChange={(e) => setSelectedExercise(e.target.value)}
-            >
-              <option value="">Todos</option>
-              {Object.values(ejercicios).flat().map((ej, index) => (
-                <option key={index} value={ej}>
-                  {ej}
-                </option>
-              ))}
-            </select>
-        </div>
+      <div>
+        <label>Filtrar por ejercicio: </label>
+        <select
+          value={filtroEjercicio}
+          onChange={(e) => setFiltroEjercicio(e.target.value)}
+        >
+          <option value="">Todos</option>
+          {Object.values(ejercicios).flat().map((ej, index) => (
+            <option key={index} value={ej}>
+              {ej}
+            </option>
+          ))}
+        </select>
+      </div>
+
 
 
       {/* Resultados en tabla */}
@@ -433,11 +439,12 @@ const Progreso = () => {
               <th>Acciones</th>
             </tr>
           </thead>
+          {/* // En la tabla, mostramos la fecha sin new Date() */}
           <tbody>
             {progresosFiltrados.map((p) => (
               <tr key={p.id}>
                 <td>{p.dni}</td>
-                <td>{new Date(p.fecha).toLocaleDateString("es-PE")}</td>
+                <td>{p.fecha}</td> {/* 👈 ya no usamos new Date */}
                 <td>{p.rutina}</td>
                 <td>{p.series}</td>
                 <td>
