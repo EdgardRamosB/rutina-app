@@ -8,7 +8,7 @@ function Home() {
       <section className="perfil">
         <div className="perfil-contenido">
           <div className="perfil-texto">
-            <h2>EDGARD</h2>
+            <h2>EDGARD RAMOS</h2>
             <h3>EENTRENAMIENTO NATURAL Y EFECTIVO
             </h3>
             <p>
