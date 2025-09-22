@@ -1,0 +1,79 @@
+.app {
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  padding: 30px;
+  background: #f4f4f8; /* Gris claro elegante */
+  color: #333;
+  min-height: 100vh;
+}
+
+h1 {
+  text-align: center;
+  font-size: 2.2rem;
+  margin-bottom: 25px;
+  color: #222;
+}
+
+h2 {
+  text-align: center;
+  margin-top: 40px;
+  color: #555;
+  font-weight: 500;
+}
+
+.productos-carrito {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 25px;
+  margin-top: 20px;
+}
+
+.card-producto {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.card-producto:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+}
+
+.card-producto img {
+  max-width: 100%;
+  height: 180px;
+  object-fit: contain;
+  border-radius: 12px;
+  margin-bottom: 15px;
+}
+
+.card-producto h3 {
+  margin: 10px 0;
+  color: #111;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.card-producto p {
+  font-weight: bold;
+  margin-bottom: 12px;
+  color: #444;
+}
+
+.card-producto button {
+  background: linear-gradient(135deg, #6a11cb, #2575fc); /* degradado azul/violeta */
+  border: none;
+  padding: 12px 18px;
+  border-radius: 10px;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.3s ease, transform 0.2s ease;
+}
+
+.card-producto button:hover {
+  opacity: 0.9;
+  transform: scale(1.05);
+}

@@ -9,6 +9,11 @@ import Servicios from "./componentes/Servicios";
 import Personalizado from "./componentes/Personalizado";
 import Navbar from "./componentes/Navbar";
 
+// Integración en tu app
+import Carrito from "./pages/Carrito"; // si lo guardas en pages
+<Route path="/carrito" element={<Carrito />} />
+
+
 // Detectar si estamos en GitHub Pages (usa HashRouter) o en otro hosting (usa BrowserRouter)
 const isGitHubPages = window.location.hostname.includes("github.io");
 const Router = isGitHubPages ? HashRouter : BrowserRouter;
@@ -28,6 +33,9 @@ export default function App() {
         <Route path="/contactanos" element={<Contactanos />} />
         <Route path="/servicios" element={<Servicios />} />
         <Route path="/personalizado" element={<Personalizado />} />
+
+              {/* 👇 NUEVA RUTA */}
+        <Route path="/carrito" element={<Carrito />} />
 
         {/* Catch-all: redirige a Home */}
         <Route path="*" element={<Navigate to="/" />} />

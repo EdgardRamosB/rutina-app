@@ -136,8 +136,8 @@ const ejercicios = {
   ],
 };
 
-// --- Helpers para parsear pesos
-// Extrae todos los números (acepta 80, 80.5, 80,5) y devuelve array de floats.
+// --- Helpers ---
+// Extrae el peso máximo
 const parseWeights = (pesoString) => {
   if (!pesoString) return [];
   return pesoString
@@ -149,12 +149,18 @@ const parseWeights = (pesoString) => {
     })
     .filter((n) => !isNaN(n));
 };
-
-// Devuelve el máximo peso de un registro (o 0 si no hay)
 const obtenerPesoMaximo = (pesoString) => {
   const weights = parseWeights(pesoString);
-  if (weights.length === 0) return 0;
-  return Math.max(...weights);
+  return weights.length > 0 ? Math.max(...weights) : 0;
+};
+// Si no hay peso, usar reps
+const obtenerValorGrafico = (pesoString) => {
+  if (!pesoString) return 0;
+  const peso = obtenerPesoMaximo(pesoString);
+  if (peso > 0) return peso;
+
+  const repsMatch = pesoString.match(/x\s*(\d+)/i);
+  return repsMatch ? parseInt(repsMatch[1]) : 0;
 };
 
 const Progreso = () => {
@@ -166,15 +172,11 @@ const Progreso = () => {
   const [peso, setPeso] = useState("");
   const [listaPesos, setListaPesos] = useState([]);
   const [progresos, setProgresos] = useState([]);
+  const [usuario, setUsuario] = useState(null);
+  const [filtroEjercicio, setFiltroEjercicio] = useState("");
   
-  // Agregar un estado para guardar el ejercicio seleccionado
-  // const [selectedExercise, setSelectedExercise] = useState("");
 
-
-  // Para el gráfico
-  const [filtroEjercicio, setFiltroEjercicio] = useState(""); // ejercicio que vamos a graficar
-
-  // Buscar progresos por DNI
+  // Buscar progresos y datos del usuario por DNI
   const handleBuscarPorDni = async () => {
     if (!dni) {
       alert("Ingrese DNI para buscar.");
@@ -190,45 +192,41 @@ const Progreso = () => {
       console.error("Error buscando:", error.message);
     } else {
       setProgresos(data || []);
-      // Si hay datos, establecer por defecto el primer ejercicio encontrado
+      setUsuario(data[0] || null);
       const ejerciciosUnicos = [...new Set((data || []).map((p) => p.rutina).filter(Boolean))];
       setFiltroEjercicio(ejerciciosUnicos[0] || "");
     }
   };
 
-  // Agregar peso a la lista
+  // Agregar peso a lista
   const agregarPeso = () => {
     if (peso.trim() !== "") {
       setListaPesos([...listaPesos, peso.trim()]);
       setPeso("");
     }
   };
-
   const eliminarPeso = (index) => {
     setListaPesos(listaPesos.filter((_, i) => i !== index));
   };
 
-
-    // Agregar progreso
+  // Agregar progreso
   const handleAgregar = async () => {
     if (!dni || !fecha || !rutina || !series || listaPesos.length === 0) {
       alert("Por favor, completa todos los campos.");
       return;
     }
-
     const { data, error } = await supabase
       .from("progresos")
       .insert([
         {
           dni,
-          fecha: fecha, // 👉 Guardar directamente como texto
+          fecha,
           rutina,
           series,
           peso: listaPesos.join(" - "),
         },
       ])
       .select();
-
     if (error) {
       console.error("Error insertando:", error.message);
     } else {
@@ -242,21 +240,13 @@ const Progreso = () => {
     }
   };
 
-
-
-
   // Eliminar progreso
   const handleEliminar = async (id) => {
     const { error } = await supabase.from("progresos").delete().eq("id", id);
-
-    if (error) {
-      console.error("Error eliminando:", error.message);
-    } else {
-      setProgresos(progresos.filter((p) => p.id !== id));
-    }
+    if (!error) setProgresos(progresos.filter((p) => p.id !== id));
   };
 
-  // Cuando cambian los progresos asegúrate que el filtro de ejercicio sigue válido
+  // Recalcular filtro si cambia progresos
   useEffect(() => {
     if (!filtroEjercicio && progresos.length > 0) {
       const ejerciciosUnicos = [...new Set(progresos.map((p) => p.rutina).filter(Boolean))];
@@ -264,27 +254,21 @@ const Progreso = () => {
     }
   }, [progresos, filtroEjercicio]);
 
-  // Preparar datos para el gráfico: ordenar por fecha y mapear a {fecha, peso}
-  // En el gráfico, evita crear Date directo
+  // Datos para gráfico
   const dataGrafico = progresos
     .filter((p) => (filtroEjercicio ? p.rutina === filtroEjercicio : true))
     .slice()
-    .sort((a, b) => a.fecha.localeCompare(b.fecha)) // ordenar como string YYYY-MM-DD
+    .sort((a, b) => a.fecha.localeCompare(b.fecha))
     .map((p) => ({
-      // usamos directamente la fecha guardada
-      fecha: p.fecha, 
-      peso: obtenerPesoMaximo(p.peso),
+      fecha: p.fecha,
+      valor: obtenerValorGrafico(p.peso),
     }))
-    .filter((d) => d.peso > 0); // quitar registros sin datos de peso
+    .filter((d) => d.valor > 0);
 
-  // Lista de ejercicios disponibles dentro de los progresos del usuario
   const ejerciciosDisponibles = [...new Set(progresos.map((p) => p.rutina).filter(Boolean))];
-
-     // filtrar los progreoss ingresados
-    const progresosFiltrados = filtroEjercicio
-      ? progresos.filter((p) => p.rutina === filtroEjercicio)
-      : progresos;
-
+  const progresosFiltrados = filtroEjercicio
+    ? progresos.filter((p) => p.rutina === filtroEjercicio)
+    : progresos;
 
   return (
     <div className="progreso-container">
@@ -302,12 +286,33 @@ const Progreso = () => {
         <button onClick={handleBuscarPorDni}>Buscar</button>
       </div>
 
-      {/* Registrar */}
+      {/* Datos del Usuario */}
+      {/* {usuario && (
+        <div className="card" style={{ marginTop: "20px" }}>
+          <h3>👤 Datos del Usuario</h3>
+          {usuario.foto && (
+            <img
+              src={usuario.foto}
+              alt="Foto del usuario"
+              width="120"
+              style={{ borderRadius: "10px", marginBottom: "10px" }}
+            />
+          )}
+          <p><strong>Nombre:</strong> {usuario.nombre}</p>
+          <p><strong>DNI:</strong> {usuario.dni}</p>
+          <p><strong>Edad:</strong> {usuario.edad}</p>
+          <p><strong>Peso corporal:</strong> {usuario.peso_corporal} kg</p>
+          <p><strong>Fecha de ingreso:</strong> {usuario.fecha_ingreso}</p>
+          <p><strong>Lesiones:</strong> {usuario.lesiones}</p>
+          <p><strong>Objetivo:</strong> {usuario.objetivo}</p>
+        </div>
+      )} */}
+
+      {/* CODIGO PARA Registrar */}
       <div className="card">
         <h3>📝 Registrar Progreso</h3>
         <input type="date" value={fecha} onChange={(e) => setFecha(e.target.value)} />
 
-        {/* Selección de categoría */}
         <select
           value={categoria}
           onChange={(e) => {
@@ -323,7 +328,6 @@ const Progreso = () => {
           ))}
         </select>
 
-        {/* Selección de ejercicio */}
         <select value={rutina} onChange={(e) => setRutina(e.target.value)} disabled={!categoria}>
           <option value="">Seleccione Ejercicio</option>
           {categoria &&
@@ -341,7 +345,6 @@ const Progreso = () => {
           onChange={(e) => setSeries(e.target.value)}
         />
 
-        {/* Pesos dinámicos */}
         <div className="peso-dinamico">
           <input
             type="text"
@@ -352,7 +355,6 @@ const Progreso = () => {
           <button onClick={agregarPeso}>Agregar Peso</button>
         </div>
 
-        {/* Lista de pesos */}
         <ul>
           {listaPesos.map((p, i) => (
             <li key={i}>
@@ -367,10 +369,8 @@ const Progreso = () => {
 
       {/* Gráfico */}
       <div className="card">
-        <h3>📊 Evolución de Peso</h3>
-
-        {/* Selector para elegir ejercicio a graficar (si hay varios) */}
-        {ejerciciosDisponibles.length > 0 ? (
+        <h3>📊 Evolución</h3>
+        {ejerciciosDisponibles.length > 0 && (
           <div style={{ marginBottom: 12 }}>
             <label style={{ marginRight: 8 }}>Ejercicio:</label>
             <select
@@ -385,10 +385,7 @@ const Progreso = () => {
               ))}
             </select>
           </div>
-        ) : (
-          <div style={{ marginBottom: 12 }}>Busca un DNI para cargar datos y ver el gráfico.</div>
         )}
-
         {dataGrafico.length === 0 ? (
           <div>No hay datos para mostrar en el gráfico.</div>
         ) : (
@@ -399,35 +396,16 @@ const Progreso = () => {
                 <XAxis dataKey="fecha" />
                 <YAxis />
                 <Tooltip />
-                <Line type="monotone" dataKey="peso" stroke="#2b6cb0" strokeWidth={3} />
+                <Line type="monotone" dataKey="valor" stroke="#2b6cb0" strokeWidth={3} />
               </LineChart>
             </ResponsiveContainer>
           </div>
         )}
       </div>
 
-      {/* codigo para filtrar los progresos */}
-      <div>
-        <label>Filtrar por ejercicio: </label>
-        <select
-          value={filtroEjercicio}
-          onChange={(e) => setFiltroEjercicio(e.target.value)}
-        >
-          <option value="">Todos</option>
-          {Object.values(ejercicios).flat().map((ej, index) => (
-            <option key={index} value={ej}>
-              {ej}
-            </option>
-          ))}
-        </select>
-      </div>
-
-
-
-      {/* Resultados en tabla */}
+      {/* Tabla */}
       <div className="card">
         <h3>📊 Progresos Ingresados</h3>
-
         <table className="tabla-progreso">
           <thead>
             <tr>
@@ -439,12 +417,11 @@ const Progreso = () => {
               <th>Acciones</th>
             </tr>
           </thead>
-          {/* // En la tabla, mostramos la fecha sin new Date() */}
           <tbody>
             {progresosFiltrados.map((p) => (
               <tr key={p.id}>
                 <td>{p.dni}</td>
-                <td>{p.fecha}</td> {/* 👈 ya no usamos new Date */}
+                <td>{p.fecha}</td>
                 <td>{p.rutina}</td>
                 <td>{p.series}</td>
                 <td>

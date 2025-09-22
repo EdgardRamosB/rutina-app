@@ -27,6 +27,8 @@ function Navbar() {
         <li><Link to="/servicios" onClick={() => setOpen(false)}>Servicios</Link></li>
         <li><Link to="/personalizado" onClick={() => setOpen(false)}>Personalizado</Link></li>
         <li><Link to="/progreso" onClick={() => setOpen(false)}>Progreso</Link></li>
+        <li><Link to="/carrito" onClick={() => setOpen(false)}>Carrito</Link></li>
+
         <li><Link to="/contactanos" onClick={() => setOpen(false)}>Contáctanos</Link></li>
       </ul>
     </nav>
