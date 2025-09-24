@@ -83,3 +83,88 @@
   font-size: 1.1rem;
   text-align: center;   /* ✅ Centra el párrafo */
 }
+
+/* Animación para Asesoría Nutricional */
+.servicio-card.nutricion {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.servicio-card.nutricion::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: rgba(79, 70, 229, 0.1);
+  transform: rotate(45deg);
+  transition: all 0.5s ease;
+  z-index: 0;
+}
+
+.servicio-card.nutricion:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 15px 30px rgba(79, 70, 229, 0.25);
+}
+
+.servicio-card.nutricion:hover::before {
+  top: -20%;
+  left: -20%;
+}
+
+/* Animación flotante */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-6px) rotate(-1deg);
+  }
+}
+
+/* Brillo dinámico que se mueve */
+@keyframes shine {
+  0% {
+    transform: translateX(-100%) rotate(25deg);
+    opacity: 0;
+  }
+  50% {
+    transform: translateX(100%) rotate(25deg);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateX(200%) rotate(25deg);
+    opacity: 0;
+  }
+}
+
+/* Card específico de nutrición */
+.servicio-card.nutricion {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  animation: float 3s ease-in-out infinite;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Capa del brillo */
+.servicio-card.nutricion::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 50%;
+  height: 200%;
+  background: linear-gradient(120deg, rgba(255,255,255,0.2), rgba(255,255,255,0));
+  transform: rotate(25deg);
+  z-index: 2;
+  animation: shine 2.5s ease-in-out infinite;
+}
+
+/* Hover elegante */
+.servicio-card.nutricion:hover {
+  transform: translateY(-10px) scale(1.08);
+  box-shadow: 0 20px 40px rgba(79, 70, 229, 0.5);
+}

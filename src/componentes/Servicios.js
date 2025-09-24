@@ -38,13 +38,15 @@ export default function Servicios() {
           </div>
 
           {/* Asesoría Nutricional */}
-          <div className="servicio-card p-6 bg-white rounded-2xl shadow-md hover:shadow-xl transition">
+          <div className="servicio-card nutricion p-6 bg-white rounded-2xl shadow-md transition">
             <Heart className="w-12 h-12 mx-auto text-indigo-600 mb-4" />
             <h3 className="text-xl font-semibold mb-2">Asesoría Nutricional</h3>
             <p className="text-gray-600">
               Planes y consejos de alimentación para potenciar tu rendimiento.
             </p>
           </div>
+
+
 
           {/* Entrenamiento Online */}
           <div className="servicio-card p-6 bg-white rounded-2xl shadow-md hover:shadow-xl transition">

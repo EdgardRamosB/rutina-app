@@ -136,8 +136,7 @@ const ejercicios = {
   ],
 };
 
-// --- Helpers ---
-// Extrae el peso máximo
+// --- Helpers para gráficos ---
 const parseWeights = (pesoString) => {
   if (!pesoString) return [];
   return pesoString
@@ -149,11 +148,12 @@ const parseWeights = (pesoString) => {
     })
     .filter((n) => !isNaN(n));
 };
+
 const obtenerPesoMaximo = (pesoString) => {
   const weights = parseWeights(pesoString);
   return weights.length > 0 ? Math.max(...weights) : 0;
 };
-// Si no hay peso, usar reps
+
 const obtenerValorGrafico = (pesoString) => {
   if (!pesoString) return 0;
   const peso = obtenerPesoMaximo(pesoString);
@@ -164,7 +164,21 @@ const obtenerValorGrafico = (pesoString) => {
 };
 
 const Progreso = () => {
+  // --- Estados usuario ---
   const [dni, setDni] = useState("");
+  const [usuario, setUsuario] = useState(null);
+  const [nuevoUsuario, setNuevoUsuario] = useState(false);
+
+  const [nombre, setNombre] = useState("");
+  const [edad, setEdad] = useState("");
+  const [pesoCorporal, setPesoCorporal] = useState("");
+  const [fechaIngreso, setFechaIngreso] = useState("");
+  const [lesiones, setLesiones] = useState("");
+  const [objetivo, setObjetivo] = useState("");
+  const [foto, setFoto] = useState("");
+  const [archivoFoto, setArchivoFoto] = useState(null);
+
+  // --- Estados progreso ---
   const [fecha, setFecha] = useState("");
   const [categoria, setCategoria] = useState("");
   const [rutina, setRutina] = useState("");
@@ -172,33 +186,54 @@ const Progreso = () => {
   const [peso, setPeso] = useState("");
   const [listaPesos, setListaPesos] = useState([]);
   const [progresos, setProgresos] = useState([]);
-  const [usuario, setUsuario] = useState(null);
   const [filtroEjercicio, setFiltroEjercicio] = useState("");
-  
 
-  // Buscar progresos y datos del usuario por DNI
+  // --- Buscar usuario y progresos por DNI ---
   const handleBuscarPorDni = async () => {
     if (!dni) {
       alert("Ingrese DNI para buscar.");
       return;
     }
-    const { data, error } = await supabase
+
+    // Buscar usuario
+    const { data: userData, error: userError } = await supabase
+      .from("usuarios")
+      .select("*")
+      .eq("dni", dni)
+      .maybeSingle();
+
+    if (userError) console.error("Error buscando usuario:", userError.message);
+
+    if (!userData) {
+      // Usuario no existe: habilitar registro
+      setUsuario(null);
+      setNuevoUsuario(true);
+      setNombre(""); setEdad(""); setPesoCorporal(""); setFechaIngreso(""); setLesiones(""); setObjetivo(""); setFoto("");
+    } else {
+      // Usuario existente
+      setUsuario(userData);
+      setNuevoUsuario(false);
+      setNombre(userData.nombre); setEdad(userData.edad); setPesoCorporal(userData.peso_corporal);
+      setFechaIngreso(userData.fecha_ingreso); setLesiones(userData.lesiones); setObjetivo(userData.objetivo);
+      setFoto(userData.foto);
+    }
+
+    // Cargar progresos
+    const { data: progData, error: progError } = await supabase
       .from("progresos")
       .select("*")
       .eq("dni", dni)
       .order("fecha", { ascending: true });
 
-    if (error) {
-      console.error("Error buscando:", error.message);
-    } else {
-      setProgresos(data || []);
-      setUsuario(data[0] || null);
-      const ejerciciosUnicos = [...new Set((data || []).map((p) => p.rutina).filter(Boolean))];
+    if (progError) console.error("Error buscando progresos:", progError.message);
+    else {
+      setProgresos(progData || []);
+      const ejerciciosUnicos = [...new Set((progData || []).map(p => p.rutina).filter(Boolean))];
       setFiltroEjercicio(ejerciciosUnicos[0] || "");
     }
   };
 
-  // Agregar peso a lista
+  // --- Agregar peso a lista ---
   const agregarPeso = () => {
     if (peso.trim() !== "") {
       setListaPesos([...listaPesos, peso.trim()]);
@@ -209,65 +244,96 @@ const Progreso = () => {
     setListaPesos(listaPesos.filter((_, i) => i !== index));
   };
 
-  // Agregar progreso
-  const handleAgregar = async () => {
+  // --- Guardar nuevo usuario con foto ---
+  const handleGuardarUsuario = async () => {
+    let urlFoto = "";
+
+    // Subir foto si hay archivo
+    if (archivoFoto) {
+      const fileExt = archivoFoto.name.split(".").pop();
+      const fileName = `${dni}.${fileExt}`;
+
+      const { data: uploadData, error: uploadError } = await supabase.storage
+        .from("usuarios")
+        .upload(fileName, archivoFoto, { cacheControl: "3600", upsert: true });
+
+      if (uploadError) console.error("Error subiendo foto:", uploadError.message);
+      else {
+        const { data: urlData, error: urlError } = supabase.storage
+          .from("usuarios")
+          .getPublicUrl(fileName);
+        if (urlError) console.error("Error obteniendo URL pública:", urlError.message);
+        else urlFoto = urlData.publicUrl;
+      }
+    }
+
+    // Guardar usuario en tabla
+    const { data: insertData, error: insertError } = await supabase
+      .from("usuarios")
+      .insert([{
+        dni,
+        nombre,
+        edad,
+        peso_corporal: pesoCorporal,
+        fecha_ingreso: fechaIngreso,
+        lesiones,
+        objetivo,
+        foto: urlFoto,
+      }])
+      .select()
+      .maybeSingle();
+
+    if (insertError) console.error("Error guardando usuario:", insertError.message);
+    else {
+      setUsuario(insertData);
+      setFoto(insertData.foto);
+      setNuevoUsuario(false);
+    }
+  };
+
+  // --- Agregar progreso ---
+  const handleAgregarProgreso = async () => {
     if (!dni || !fecha || !rutina || !series || listaPesos.length === 0) {
       alert("Por favor, completa todos los campos.");
       return;
     }
+
     const { data, error } = await supabase
       .from("progresos")
-      .insert([
-        {
-          dni,
-          fecha,
-          rutina,
-          series,
-          peso: listaPesos.join(" - "),
-        },
-      ])
+      .insert([{
+        dni,
+        fecha,
+        rutina,
+        series,
+        peso: listaPesos.join(" - "),
+      }])
       .select();
-    if (error) {
-      console.error("Error insertando:", error.message);
-    } else {
-      setProgresos((prev) => [...prev, ...data]);
+
+    if (error) console.error("Error insertando progreso:", error.message);
+    else {
+      setProgresos(prev => [...prev, ...data]);
+      setFecha(""); setCategoria(""); setRutina(""); setSeries(""); setListaPesos([]);
       if (!filtroEjercicio) setFiltroEjercicio(data[0]?.rutina || "");
-      setFecha("");
-      setCategoria("");
-      setRutina("");
-      setSeries("");
-      setListaPesos([]);
     }
   };
 
-  // Eliminar progreso
-  const handleEliminar = async (id) => {
+  // --- Eliminar progreso ---
+  const handleEliminarProgreso = async (id) => {
     const { error } = await supabase.from("progresos").delete().eq("id", id);
-    if (!error) setProgresos(progresos.filter((p) => p.id !== id));
+    if (!error) setProgresos(progresos.filter(p => p.id !== id));
   };
 
-  // Recalcular filtro si cambia progresos
-  useEffect(() => {
-    if (!filtroEjercicio && progresos.length > 0) {
-      const ejerciciosUnicos = [...new Set(progresos.map((p) => p.rutina).filter(Boolean))];
-      setFiltroEjercicio(ejerciciosUnicos[0] || "");
-    }
-  }, [progresos, filtroEjercicio]);
-
-  // Datos para gráfico
+  // --- Datos para gráfico ---
   const dataGrafico = progresos
-    .filter((p) => (filtroEjercicio ? p.rutina === filtroEjercicio : true))
+    .filter(p => (filtroEjercicio ? p.rutina === filtroEjercicio : true))
     .slice()
     .sort((a, b) => a.fecha.localeCompare(b.fecha))
-    .map((p) => ({
-      fecha: p.fecha,
-      valor: obtenerValorGrafico(p.peso),
-    }))
-    .filter((d) => d.valor > 0);
+    .map(p => ({ fecha: p.fecha, valor: obtenerValorGrafico(p.peso) }))
+    .filter(d => d.valor > 0);
 
-  const ejerciciosDisponibles = [...new Set(progresos.map((p) => p.rutina).filter(Boolean))];
+  const ejerciciosDisponibles = [...new Set(progresos.map(p => p.rutina).filter(Boolean))];
   const progresosFiltrados = filtroEjercicio
-    ? progresos.filter((p) => p.rutina === filtroEjercicio)
+    ? progresos.filter(p => p.rutina === filtroEjercicio)
     : progresos;
 
   return (
@@ -275,96 +341,72 @@ const Progreso = () => {
       <h2 className="titulo">📈 Registrar y Consultar Progreso</h2>
 
       {/* Buscar */}
-      <div className="card">
+      <div className="ficha-usuario">
         <h3>🔍 Buscar por DNI</h3>
-        <input
-          type="text"
-          placeholder="Ingrese DNI"
-          value={dni}
-          onChange={(e) => setDni(e.target.value)}
-        />
+        <input type="text" placeholder="Ingrese DNI" value={dni} onChange={e => setDni(e.target.value)} />
         <button onClick={handleBuscarPorDni}>Buscar</button>
       </div>
 
-      {/* Datos del Usuario */}
-      {/* {usuario && (
-        <div className="card" style={{ marginTop: "20px" }}>
+      {/* Usuario */}
+      {/* Usuario */}
+      {/* Usuario */}
+        <div className="ficha-usuario">
           <h3>👤 Datos del Usuario</h3>
-          {usuario.foto && (
-            <img
-              src={usuario.foto}
-              alt="Foto del usuario"
-              width="120"
-              style={{ borderRadius: "10px", marginBottom: "10px" }}
-            />
-          )}
-          <p><strong>Nombre:</strong> {usuario.nombre}</p>
-          <p><strong>DNI:</strong> {usuario.dni}</p>
-          <p><strong>Edad:</strong> {usuario.edad}</p>
-          <p><strong>Peso corporal:</strong> {usuario.peso_corporal} kg</p>
-          <p><strong>Fecha de ingreso:</strong> {usuario.fecha_ingreso}</p>
-          <p><strong>Lesiones:</strong> {usuario.lesiones}</p>
-          <p><strong>Objetivo:</strong> {usuario.objetivo}</p>
-        </div>
-      )} */}
 
-      {/* CODIGO PARA Registrar */}
+          {usuario && foto && (
+            <img src={foto} alt="Foto del usuario" className="foto-usuario" />
+          )}
+
+          {nuevoUsuario ? (
+            <>
+              <input type="text" placeholder="Nombre" value={nombre} onChange={e => setNombre(e.target.value)} />
+              <input type="number" placeholder="Edad" value={edad} onChange={e => setEdad(e.target.value)} />
+              <input type="number" placeholder="Peso corporal" value={pesoCorporal} onChange={e => setPesoCorporal(e.target.value)} />
+              <input type="date" placeholder="Fecha de ingreso" value={fechaIngreso} onChange={e => setFechaIngreso(e.target.value)} />
+              <input type="text" placeholder="Lesiones" value={lesiones} onChange={e => setLesiones(e.target.value)} />
+              <input type="text" placeholder="Objetivo" value={objetivo} onChange={e => setObjetivo(e.target.value)} />
+              <input type="file" accept="image/*" onChange={e => setArchivoFoto(e.target.files[0])} />
+              <button onClick={handleGuardarUsuario}>Guardar Usuario</button>
+            </>
+          ) : usuario && (
+            <>
+              <p>🧑 <strong>Nombre:</strong> {nombre}</p>
+              <p>🪪 <strong>DNI:</strong> {dni}</p>
+              <p>🎂 <strong>Edad:</strong> {edad}</p>
+              <p>⚖️ <strong>Peso corporal:</strong> {pesoCorporal} kg</p>
+              <p>📅 <strong>Fecha de ingreso:</strong> {fechaIngreso}</p>
+              <p>💢 <strong>Lesiones:</strong> {lesiones}</p>
+              <p>🎯 <strong>Objetivo:</strong> {objetivo}</p>
+            </>
+          )}
+        </div>
+
+
+
+
+
+      {/* Registrar Progreso */}
       <div className="card">
         <h3>📝 Registrar Progreso</h3>
-        <input type="date" value={fecha} onChange={(e) => setFecha(e.target.value)} />
-
-        <select
-          value={categoria}
-          onChange={(e) => {
-            setCategoria(e.target.value);
-            setRutina("");
-          }}
-        >
+        <input type="date" value={fecha} onChange={e => setFecha(e.target.value)} />
+        <select value={categoria} onChange={e => { setCategoria(e.target.value); setRutina(""); }}>
           <option value="">Seleccione Categoría</option>
-          {Object.keys(ejercicios).map((cat) => (
-            <option key={cat} value={cat}>
-              {cat}
-            </option>
-          ))}
+          {Object.keys(ejercicios).map(cat => (<option key={cat} value={cat}>{cat}</option>))}
         </select>
-
-        <select value={rutina} onChange={(e) => setRutina(e.target.value)} disabled={!categoria}>
+        <select value={rutina} onChange={e => setRutina(e.target.value)} disabled={!categoria}>
           <option value="">Seleccione Ejercicio</option>
-          {categoria &&
-            ejercicios[categoria].map((ej, i) => (
-              <option key={i} value={ej}>
-                {ej}
-              </option>
-            ))}
+          {categoria && ejercicios[categoria].map((ej, i) => (<option key={i} value={ej}>{ej}</option>))}
         </select>
-
-        <input
-          type="number"
-          placeholder="Series"
-          value={series}
-          onChange={(e) => setSeries(e.target.value)}
-        />
+        <input type="number" placeholder="Series" value={series} onChange={e => setSeries(e.target.value)} />
 
         <div className="peso-dinamico">
-          <input
-            type="text"
-            placeholder="Peso y repeticiones (ej: 80kg x 12 reps)"
-            value={peso}
-            onChange={(e) => setPeso(e.target.value)}
-          />
+          <input type="text" placeholder="Peso y repeticiones (ej: 80kg x 12 reps)" value={peso} onChange={e => setPeso(e.target.value)} />
           <button onClick={agregarPeso}>Agregar Peso</button>
         </div>
-
         <ul>
-          {listaPesos.map((p, i) => (
-            <li key={i}>
-              {p}
-              <button onClick={() => eliminarPeso(i)}>❌</button>
-            </li>
-          ))}
+          {listaPesos.map((p, i) => <li key={i}>{p} <button onClick={() => eliminarPeso(i)}>❌</button></li>)}
         </ul>
-
-        <button onClick={handleAgregar}>Agregar Progreso</button>
+        <button onClick={handleAgregarProgreso}>Agregar Progreso</button>
       </div>
 
       {/* Gráfico */}
@@ -373,16 +415,9 @@ const Progreso = () => {
         {ejerciciosDisponibles.length > 0 && (
           <div style={{ marginBottom: 12 }}>
             <label style={{ marginRight: 8 }}>Ejercicio:</label>
-            <select
-              value={filtroEjercicio}
-              onChange={(e) => setFiltroEjercicio(e.target.value)}
-            >
+            <select value={filtroEjercicio} onChange={e => setFiltroEjercicio(e.target.value)}>
               <option value="">-- Todos --</option>
-              {ejerciciosDisponibles.map((ej) => (
-                <option key={ej} value={ej}>
-                  {ej}
-                </option>
-              ))}
+              {ejerciciosDisponibles.map(ej => <option key={ej} value={ej}>{ej}</option>)}
             </select>
           </div>
         )}
@@ -418,27 +453,22 @@ const Progreso = () => {
             </tr>
           </thead>
           <tbody>
-            {progresosFiltrados.map((p) => (
+            {progresosFiltrados.map(p => (
               <tr key={p.id}>
                 <td>{p.dni}</td>
                 <td>{p.fecha}</td>
                 <td>{p.rutina}</td>
                 <td>{p.series}</td>
+                <td>{p.peso.split("-").map((serie, idx) => <div key={idx}>{serie.trim()}</div>)}</td>
                 <td>
-                  {p.peso
-                    .split("-")
-                    .map((serie, idx) => <div key={idx}>{serie.trim()}</div>)}
-                </td>
-                <td>
-                  <button className="btn-eliminar" onClick={() => handleEliminar(p.id)}>
-                    ❌ Eliminar
-                  </button>
+                  <button className="btn-eliminar" onClick={() => handleEliminarProgreso(p.id)}>❌ Eliminar</button>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+
     </div>
   );
 };
