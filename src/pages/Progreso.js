@@ -116,6 +116,7 @@ const ejercicios = {
     "Curl de biceps femoral de pie",
     "Peso muerto rumano con mancuernas / Isquiotibiales",
     "Sentadilla sumo",
+    "Flexores de cadera",
   ],
   Abdomen: ["Abdominales básicos", "Crunch bicicleta", "Plancha frontal"],
   Pantorrillas: ["elevaciones de talones"],
