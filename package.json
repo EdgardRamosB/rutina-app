@@ -7,6 +7,7 @@
   "dependencies": {
     "@mercadopago/sdk-react": "^1.0.6",
     "@supabase/supabase-js": "^2.57.2",
+    "axios": "^1.12.2",
     "cors": "^2.8.5",
     "express": "^5.1.0",
     "firebase": "^12.2.1",
