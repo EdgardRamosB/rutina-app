@@ -1,16 +1,18 @@
 import React from "react";
 import { Routes, Route, Navigate, BrowserRouter, HashRouter } from "react-router-dom";
 
-import Progreso from "./pages/Progreso";
-import Home from "./pages/Home";
+import Progreso from "./pages/Progreso.js";
+import Home from "./pages/Home.js";
 import "./App.css";
-import Contactanos from "./componentes/Contactanos";
-import Servicios from "./componentes/Servicios";
-import Personalizado from "./componentes/Personalizado";
-import Navbar from "./componentes/Navbar";
+import Contactanos from "./componentes/Contactanos.js";
+import Servicios from "./componentes/Servicios.js";
+import Personalizado from "./componentes/Personalizado.js";
+import Navbar from "./componentes/Navbar.js";
+
+import CheckoutButton from "./pages/CheckoutButton.js"; // si lo estás usando
 
 // Integración en tu app
-import Carrito from "./pages/Carrito"; // si lo guardas en pages
+import Carrito from "./componentes/Carrito.js";// si lo guardas en pages
 <Route path="/carrito" element={<Carrito />} />
 
 

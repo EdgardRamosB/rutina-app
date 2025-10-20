@@ -1,6 +1,6 @@
 // src/pages/Progreso.js
 import React, { useState, useEffect } from "react";
-import { supabase } from "../supabaseClient";
+import { supabase } from "../supabaseClient.js";
 import "./Progreso.css";
 
 import {
@@ -134,6 +134,9 @@ const ejercicios = {
     "Peso muerto rumano con barra",
     "Patadas traseras",
     "zancadas en smith con deficit",
+    "zancadas con barra libre",
+
+
   ],
 };
 

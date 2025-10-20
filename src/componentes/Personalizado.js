@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
 import { motion } from "framer-motion";
-import imagenes from "../data/imagenes";
+import imagenes from "../data/imagenes.js";
 
 
 
@@ -19,7 +19,7 @@ import {
   criteriosMujerPrincipianteGanarMasaSinEquipo,
   criteriosMujerIntermedioGanarMasaSinEquipo,
   criteriosMujerAvanzadoGanarMasaSinEquipo,
-} from "../data/criterios";
+} from "../data/criterios.js";
 
 function Servicios() {
   const [completados, setCompletados] = useState({});
