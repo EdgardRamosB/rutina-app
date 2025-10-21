@@ -5,13 +5,14 @@ import axios from "axios";
 import { useState } from "react";
 
 const products = [
-  { id: 1, title: "Omega 3", price: 50, image: "/imagenes/Omega.png" },
-  { id: 2, title: "Ashwagandha", price: 40, image: "/imagenes/Ashwagandha.jpg" },
-  { id: 3, title: "Anabol Hardcore", price: 120, image: "/imagenes/Anabol.jpg" },
-  { id: 4, title: "BeastBuds Pro", price: 200, image: "/imagenes/airwireless.png" },
-  { id: 5, title: "IronBeats X", price: 180, image: "/imagenes/bigbluepro.png"},
-  { id: 6, title: "TitanSound Max", price: 250, image: "/imagenes/brookstone.png" },
+  { id: 1, title: "Omega 3", price: 50, image: `${process.env.PUBLIC_URL}/imagenes/Omega.png` },
+  { id: 2, title: "Ashwagandha", price: 40, image: `${process.env.PUBLIC_URL}/imagenes/Ashwagandha.jpg` },
+  { id: 3, title: "Anabol Hardcore", price: 120, image: `${process.env.PUBLIC_URL}/imagenes/Anabol.jpg` },
+  { id: 4, title: "BeastBuds Pro", price: 200, image: `${process.env.PUBLIC_URL}/imagenes/airwireless.png` },
+  { id: 5, title: "IronBeats X", price: 180, image: `${process.env.PUBLIC_URL}/imagenes/bigbluepro.png` },
+  { id: 6, title: "TitanSound Max", price: 250, image: `${process.env.PUBLIC_URL}/imagenes/brookstone.png` },
 ];
+
 
 const Carrito = () => {
   const [preferenceId, setPreferenceId] = useState(null);
