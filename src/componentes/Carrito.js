@@ -1,25 +1,108 @@
-// src/Carrito.js
 import "./Carrito.css";
-import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
+import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
 import axios from "axios";
 import { useState } from "react";
 
 const products = [
-  { id: 1, title: "Omega 3", price: 50, image: `${process.env.PUBLIC_URL}/imagenes/Omega.png` },
-  { id: 2, title: "Ashwagandha", price: 40, image: `${process.env.PUBLIC_URL}/imagenes/Ashwagandha.jpg` },
-  { id: 3, title: "Anabol Hardcore", price: 120, image: `${process.env.PUBLIC_URL}/imagenes/Anabol.jpg` },
-  { id: 4, title: "BeastBuds Pro", price: 200, image: `${process.env.PUBLIC_URL}/imagenes/airwireless.png` },
-  { id: 5, title: "IronBeats X", price: 180, image: `${process.env.PUBLIC_URL}/imagenes/bigbluepro.png` },
-  { id: 6, title: "TitanSound Max", price: 250, image: `${process.env.PUBLIC_URL}/imagenes/brookstone.png` },
+  {
+    id: 1,
+    title: "Omega 3",
+    price: 79.99,
+    image: `${process.env.PUBLIC_URL}/imagenes/Omega.png`,
+    description: "Mejora la salud cardiovascular y la concentración."
+  },
+  {
+    id: 2,
+    title: "Ashwagandha",
+    price: 78.99,
+    image: `${process.env.PUBLIC_URL}/imagenes/Ashwagandha.jpg`,
+    description: "Reduce el estrés y mejora el rendimiento físico."
+  },
+  {
+    id: 3,
+    title: "MYO & D-Chiro Inositol",
+    price: 119.99,
+    image: `${process.env.PUBLIC_URL}/imagenes/inositol.png`,
+    description: "Favorece el equilibrio hormonal y la energía natural."
+  },
+  {
+    id: 4,
+    title: "Anabol Hardcore",
+    price: 119.99,
+    image: `${process.env.PUBLIC_URL}/imagenes/Anabol.jpg`,
+    description: "Estimula el crecimiento muscular y la fuerza máxima."
+  },
+  {
+    id: 5,
+    title: "AirWireless Helix",
+    price: 49.99,
+    image: `${process.env.PUBLIC_URL}/imagenes/airwireless.png`,
+    description: "Auriculares deportivos con sonido nítido y buena batería."
+  },
+  {
+    id: 6,
+    title: "Auricular Bigblue Pro",
+    price: 59.99,
+    image: `${process.env.PUBLIC_URL}/imagenes/bigbluepro.png`,
+    description: "Diseño ergonómico y cancelación de ruido avanzada."
+  },
+  {
+    id: 7,
+    title: "Wireless Headphones",
+    price: 59.99,
+    image: `${process.env.PUBLIC_URL}/imagenes/brookstone.png`,
+    description: "Comodidad y potencia para entrenamientos intensos."
+  },
+  {
+    id: 8,
+    title: "Wireless Headphones Blue",
+    price: 54.99,
+    image: `${process.env.PUBLIC_URL}/imagenes/Wireless_Headphones-azu.png`,
+    description: "Estilo moderno y gran sonido en cada repetición."
+  },
+  {
+    id: 9,
+    title: "True Wireless Earbuds White",
+    price: 59.99,
+    image: `${process.env.PUBLIC_URL}/imagenes/earbuds.png`,
+    description: "Compactos, ligeros y con conectividad rápida Bluetooth."
+  },
+  {
+    id: 10,
+    title: "True Wireless Earbuds Black",
+    price: 59.99,
+    image: `${process.env.PUBLIC_URL}/imagenes/truewirelesnegro.png`,
+    description: "Diseño elegante con sonido envolvente de alta calidad."
+  },
+  {
+    id: 11,
+    title: "True Wireless Active Noise Cancelation",
+    price: 119.99,
+    image: `${process.env.PUBLIC_URL}/imagenes/teuewirelesespecial.png`,
+    description: "Cancelación activa de ruido y batería de larga duración."
+  },
+  {
+    id: 12,
+    title: "Ultrabuds usb-c EARBUDS",
+    price: 34.99,
+    image: `${process.env.PUBLIC_URL}/imagenes/ultrabuds.png`,
+    description: "Auriculares con cable USB-C, compactos y de gran fidelidad."
+  },
+  {
+    id: 13,
+    title: "Lucid Magic Beats",
+    price: 49.99,
+    image: `${process.env.PUBLIC_URL}/imagenes/magic.jpg`,
+    description: "Potente sonido y diseño llamativo para entrenar con ritmo."
+  }
 ];
-
 
 const Carrito = () => {
   const [preferenceId, setPreferenceId] = useState(null);
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [quantities, setQuantities] = useState({}); // guardar cantidades por producto
+  const [quantities, setQuantities] = useState({});
 
-  initMercadoPago('APP_USR-841d2d88-0ffb-4dd3-9345-97ff5fdba99b', {
+  initMercadoPago("APP_USR-841d2d88-0ffb-4dd3-9345-97ff5fdba99b", {
     locale: "es-PE",
   });
 
@@ -30,7 +113,6 @@ const Carrito = () => {
         quantity: quantity,
         price: product.price,
       });
-
       const { id } = response.data;
       return id;
     } catch (error) {
@@ -39,7 +121,7 @@ const Carrito = () => {
   };
 
   const handleBuy = async (product) => {
-    const quantity = quantities[product.id] || 1; 
+    const quantity = quantities[product.id] || 1;
     const id = await createPreference(product, quantity);
     if (id) {
       setPreferenceId(id);
@@ -55,39 +137,41 @@ const Carrito = () => {
   };
 
   return (
-    <div className='card-product-container'>
-      {products.map((product) => {
-        const quantity = quantities[product.id] || 1;
-        const total = product.price * quantity;
+    <div className="carrito-page">
+      <h1 className="store-title">Suplementos y Música para un Mejor Rendimiento</h1>
 
-        return (
-          <div key={product.id} className='card-product'>
-            <div className='card-product-card'>
-              <img src={product.image} alt={product.title} />
-              <h3>{product.title}</h3>
-              <p className='price'>Precio unitario: {product.price} $</p>
+      <div className="card-product-container">
+        {products.map((product) => {
+          const quantity = quantities[product.id] || 1;
+          const total = product.price * quantity;
 
-              {/* Campo para seleccionar cantidad */}
-              <input
-                type="number"
-                min="1"
-                value={quantity}
-                onChange={(e) => handleQuantityChange(product.id, e.target.value)}
-              />
+          return (
+            <div key={product.id} className="card-product">
+              <div className="card-product-card">
+                <img src={product.image} alt={product.title} />
+                <h3>{product.title}</h3>
+                <p className="description">{product.description}</p>
+                <p className="price">Precio unitario: {product.price} $</p>
 
-              {/* Mostrar precio total */}
-              <p className='total'>Total: {total} $</p>
+                <input
+                  type="number"
+                  min="1"
+                  value={quantity}
+                  onChange={(e) => handleQuantityChange(product.id, e.target.value)}
+                />
 
-              <button onClick={() => handleBuy(product)}>Comprar</button>
+                <p className="total">Total: {total} $</p>
 
-              {/* Botón de pago solo para el producto seleccionado */}
-              {preferenceId && selectedProduct === product.id && (
-                <Wallet initialization={{ preferenceId }} />
-              )}
+                <button onClick={() => handleBuy(product)}>Comprar</button>
+
+                {preferenceId && selectedProduct === product.id && (
+                  <Wallet initialization={{ preferenceId }} />
+                )}
+              </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
     </div>
   );
 };
