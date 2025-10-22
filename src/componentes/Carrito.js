@@ -101,15 +101,25 @@ const Carrito = () => {
   const [preferenceId, setPreferenceId] = useState(null);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [quantities, setQuantities] = useState({});
+    //CREDENCIALES DE PRUEBA CUENTA FAKE D VENDEDOR
+    initMercadoPago("APP_USR-841d2d88-0ffb-4dd3-9345-97ff5fdba99b", {
+      locale: "es-PE",
+    });
 
-  initMercadoPago("APP_USR-841d2d88-0ffb-4dd3-9345-97ff5fdba99b", {
-    locale: "es-PE",
+      //CREDENCIALES DE PRODUCCION CUENTA ORIGINAL
+   initMercadoPago("APP_USR-acc4dd01-e955-4b11-ab38-73403968b079", {
+     locale: "es-PE",
   });
+
+    //CREDENCIALES DE PRUEBA CUENTA VERDADERA
+    // initMercadoPago("APP_USR-c11c7ccc-b271-4a26-9297-c0bbdbb8abce", {
+    // locale: "es-PE",
+    // });
 
   const createPreference = async (product, quantity) => {
     try {
-      // const response = await axios.post("http://localhost:3001/create_preference", {
-      const response = await axios.post("https://rutina-backend.onrender.com/create_preference", {
+    //  const response = await axios.post("http://localhost:3001/create_preference", {
+     const response = await axios.post("https://rutina-backend.onrender.com/create_preference", {
   
         title: product.title,
         quantity: quantity,

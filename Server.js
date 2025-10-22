@@ -5,10 +5,20 @@ import cors from "cors";/*instalar*/
 // SDK de Mercado Pago
 import { MercadoPagoConfig, Preference } from "mercadopago";
 
-const client = new MercadoPagoConfig({
-  // PROBANDO CREDENCIALES DE VENDEDOR (CUENTA FAKE)
-  accessToken: "APP_USR-3497655455782000-101615-683d0a56148bbf161ea3ac1bc7f82aa3-2913432341",
-});
+  // PROBANDO CREDENCIALES DE PRUEBA DE VENDEDOR (CUENTA FAKE)
+  //  const client = new MercadoPagoConfig({
+  //    accessToken: "APP_USR-3497655455782000-101615-683d0a56148bbf161ea3ac1bc7f82aa3-2913432341",
+  //  });
+
+     // CREDENCIALES DE PRODUCCION CUENTA ORIGINAL
+   const client = new MercadoPagoConfig({
+     accessToken: "APP_USR-5286935371226254-101615-591f92870da5b480434fce466c29a5d1-139260278",
+   });
+
+    // CREDENCIALES DE PRUEBA DE VENDEDOR ORIGINAL
+  // const client = new MercadoPagoConfig({
+  //   accessToken: "APP_USR-4034526063182034-101615-801a6358e77aee43c0064d2cd5ea3a55-2913071079",
+  //  });
 
 const app = express();
 const port = 3001;
