@@ -116,21 +116,34 @@ const Carrito = () => {
     // locale: "es-PE",
     // });
 
-  const createPreference = async (product, quantity) => {
-    try {
-    //  const response = await axios.post("http://localhost:3001/create_preference", {
-     const response = await axios.post("https://rutina-backend.onrender.com/create_preference", {
-  
-        title: product.title,
-        quantity: quantity,
-        price: product.price,
-      });
-      const { id } = response.data;
-      return id;
-    } catch (error) {
-      console.log(error);
-    }
-  };
+const createPreference = async (product, quantity) => {
+  try {
+    const response = await axios.post(
+      "https://rutina-backend.onrender.com/create_preference",
+      {
+        items: [
+          {
+            title: product.title,
+            quantity: quantity,
+            currency_id: "PEN",
+            unit_price: Number(product.price),
+          },
+        ],
+        back_urls: {
+          success: "https://rutina-app-pied.vercel.app/success",
+          failure: "https://rutina-app-pied.vercel.app/failure",
+          pending: "https://rutina-app-pied.vercel.app/pending",
+        },
+        auto_return: "approved",
+      }
+    );
+
+    const { id } = response.data;
+    return id;
+  } catch (error) {
+    console.error("❌ Error al crear preferencia:", error.response?.data || error);
+  }
+};
 
   const handleBuy = async (product) => {
     const quantity = quantities[product.id] || 1;
