@@ -5,10 +5,12 @@ import cors from "cors";/*instalar*/
 // SDK de Mercado Pago
 import { MercadoPagoConfig, Preference } from "mercadopago";
 
-const client = new MercadoPagoConfig({
-  // PROBANDO CREDENCIALES DE VENDEDOR (CUENTA FAKE)
-  accessToken: "APP_USR-3497655455782000-101615-683d0a56148bbf161ea3ac1bc7f82aa3-2913432341",
-});
+
+  // PROBANDO CREDENCIALES DE VENDEDOR (CUENTA FAKE) y RENDER PARA QUE FUNCIONE SIN BACK LOCAL
+    const client = new MercadoPagoConfig({
+      accessToken: process.env.ACCESS_TOKEN_MP,
+    });
+
 
 const app = express();
 const port = 3001;
