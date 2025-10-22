@@ -108,7 +108,9 @@ const Carrito = () => {
 
   const createPreference = async (product, quantity) => {
     try {
-      const response = await axios.post("http://localhost:3001/create_preference", {
+      // const response = await axios.post("http://localhost:3001/create_preference", {
+      const response = await axios.post("https://rutina-backend.onrender.com/create_preference", {
+  
         title: product.title,
         quantity: quantity,
         price: product.price,
