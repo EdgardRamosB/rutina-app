@@ -102,9 +102,9 @@ const Carrito = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [quantities, setQuantities] = useState({});
     //CREDENCIALES DE PRUEBA CUENTA FAKE D VENDEDOR
-    initMercadoPago("APP_USR-841d2d88-0ffb-4dd3-9345-97ff5fdba99b", {
-      locale: "es-PE",
-    });
+    // initMercadoPago("APP_USR-841d2d88-0ffb-4dd3-9345-97ff5fdba99b", {
+    //   locale: "es-PE",
+    // });
 
       //CREDENCIALES DE PRODUCCION CUENTA ORIGINAL
    initMercadoPago("APP_USR-acc4dd01-e955-4b11-ab38-73403968b079", {

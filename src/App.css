@@ -617,3 +617,7 @@ body {
 .whatsapp-button:hover {
   transform: scale(1.1);
 }
+
+.subtitulo {
+  color: #ffffff;
+}

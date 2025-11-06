@@ -9,7 +9,7 @@ function Home() {
         <div className="perfil-contenido">
           <div className="perfil-texto">
             <h2>EDGARD RAMOS</h2>
-            <h3>EENTRENAMIENTO NATURAL Y EFECTIVO
+            <h3 className="subtitulo">ENTRENAMIENTO NATURAL Y EFECTIVO
             </h3>
             <p>
               Apasionado por el fitness y la tecnología. Estoy desarrollando una app para rutinas
