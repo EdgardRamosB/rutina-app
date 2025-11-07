@@ -12,8 +12,8 @@ import Navbar from "./componentes/Navbar.js";
 import CheckoutButton from "./pages/CheckoutButton.js"; // si lo estás usando
 
 // Integración en tu app
-import Carrito from "./componentes/Carrito.js";// si lo guardas en pages
-<Route path="/carrito" element={<Carrito />} />
+import Tienda from "./componentes/Carrito.js";// si lo guardas en pages
+<Route path="/tienda" element={<Tienda />} />
 
 
 // Detectar si estamos en GitHub Pages (usa HashRouter) o en otro hosting (usa BrowserRouter)
@@ -37,7 +37,7 @@ export default function App() {
         <Route path="/personalizado" element={<Personalizado />} />
 
               {/* 👇 NUEVA RUTA */}
-        <Route path="/carrito" element={<Carrito />} />
+        <Route path="/tienda" element={<Tienda />} />
 
         {/* Catch-all: redirige a Home */}
         <Route path="*" element={<Navigate to="/" />} />
