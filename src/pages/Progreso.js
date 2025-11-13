@@ -96,6 +96,7 @@ const ejercicios = {
     "jalon polea frontal / agarre cerrado",
     "Pull over",
     "Remo con mancuerna / Serrucho",
+    "Remo con mancuerna a dos manos",
     "Superman",
   ],
   Cuadriceps: [
@@ -132,6 +133,7 @@ const ejercicios = {
     "Patada Sprinter",
     "Puente de gluteo",
     "Peso muerto rumano con barra",
+    "Peso muerto rumano con mancuerna",
     "Patadas traseras",
     "zancadas en smith con deficit",
     "zancadas con barra libre",
