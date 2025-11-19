@@ -7,7 +7,7 @@ const products = [
   {
     id: 1,
     title: "Omega 3",
-    price: 79.99,
+    price: 9.99,
     image: `${process.env.PUBLIC_URL}/imagenes/Omega.png`,
     description: "Mejora la salud cardiovascular y la concentración."
   },
