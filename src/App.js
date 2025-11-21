@@ -12,7 +12,7 @@ import Navbar from "./componentes/Navbar.js";
 import CheckoutButton from "./pages/CheckoutButton.js"; // si lo estás usando
 
 // Integración en tu app
-import Tienda from "./componentes/Carrito.js";// si lo guardas en pages
+import Tienda from "./componentes/Tienda.js";// si lo guardas en pages
 <Route path="/tienda" element={<Tienda />} />
 
 

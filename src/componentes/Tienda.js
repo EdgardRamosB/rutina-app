@@ -1,4 +1,4 @@
-import "./Carrito.css";
+import "./Tienda.css";
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
 import axios from "axios";
 import { useState } from "react";
