@@ -124,6 +124,7 @@ const ejercicios = {
   Gluteos: [
     "Step up",
     "Sentadilla bulgara",
+    "Sentadilla bulgara sin step",
     "Patada en polea",
     "Sentadilla Profunda en Smith",
     "Back extension",
