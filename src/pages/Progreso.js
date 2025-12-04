@@ -137,7 +137,9 @@ const ejercicios = {
     "Patadas traseras",
     "zancadas en smith con deficit",
     "zancadas con barra libre",
-
+    "Hiptrust en maquina",
+    "Patada lateral abductores",
+    "Flexores de cadera",
 
   ],
 };
