@@ -101,6 +101,7 @@ const ejercicios = {
   ],
   Cuadriceps: [
     "Sentadilla",
+    "Sentadilla a una pierna",
     "Extension de piernas",
     "Sentadilla frontal",
     "Hack Squat",
