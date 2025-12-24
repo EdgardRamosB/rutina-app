@@ -56,6 +56,7 @@ const ejercicios = {
     "Jalon a la cara",
     "Deltoide posterior en banco inclinado",
     "Deltoide posterior en maquina",
+    "Deltoide posterior en polea unilateral",
     "Cruce en polea alta",
     "Press hombro con barra",
   ],
