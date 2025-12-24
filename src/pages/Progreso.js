@@ -75,6 +75,7 @@ const ejercicios = {
     "Chin ups",
     "Curl araña con mancuerna",
     "Curl araña con barra",
+    "Curl predicador unilateral",
   ],
   Triceps: [
     "Extension triceps a una mano polea alta",
