@@ -113,6 +113,7 @@ const ejercicios = {
     "Zancada con mancuerna",
     "Zancadas laterales",
     "Sentadillas con salto",
+    "Aductores"
   ],
   Femoral: [
     "Curl femoral sentado",
@@ -144,6 +145,7 @@ const ejercicios = {
     "Hiptrust en maquina",
     "Patada lateral abductores",
     "Flexores de cadera",
+    "Patada hacia atras en polea"
 
   ],
 };
