@@ -145,7 +145,8 @@ const ejercicios = {
     "Hiptrust en maquina",
     "Patada lateral abductores",
     "Flexores de cadera",
-    "Patada hacia atras en polea"
+    "Patada hacia atras en polea",
+    "Peso muerto rumano unilateral"
 
   ],
 };
