@@ -88,6 +88,7 @@ const ejercicios = {
     "Extension de triceps a una mano",
     "Press banco cerrado",
     "Fondos para triceps",
+    "Extension triceps en maquina",
   ],
   Espalda: [
     "Dominadas abiertas / Espalda",
@@ -99,6 +100,7 @@ const ejercicios = {
     "Pull over",
     "Remo con mancuerna / Serrucho",
     "Remo con mancuerna a dos manos",
+    "Remo en T",
     "Superman",
   ],
   Cuadriceps: [
