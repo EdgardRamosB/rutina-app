@@ -59,6 +59,7 @@ const ejercicios = {
     "Deltoide posterior en polea unilateral",
     "Cruce en polea alta",
     "Press hombro con barra",
+    "Deltoide posterior doble",
   ],
   Biceps: [
     "Curl Biceps mancuerna",
@@ -102,6 +103,7 @@ const ejercicios = {
     "Remo con mancuerna a dos manos",
     "Remo en T",
     "Superman",
+    "Lower Traps",
   ],
   Cuadriceps: [
     "Sentadilla",
