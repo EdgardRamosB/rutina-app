@@ -109,6 +109,7 @@ const ejercicios = {
     "Sentadilla",
     "Sentadilla a una pierna",
     "Extension de piernas",
+    "Extension de piernas unilateral",
     "Sentadilla frontal",
     "Hack Squat",
     "Prensa",
