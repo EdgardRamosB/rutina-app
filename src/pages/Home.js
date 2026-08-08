@@ -18,7 +18,7 @@ function Home() {
             <button className="btn-quiensoy">Quien soy yo</button>
           </div>
           <div className="perfil-foto">
-            <img src={`${process.env.PUBLIC_URL}/imagenes/edperfil3.png`} alt="EDGARD JORDAN" />
+            <img src={`${process.env.PUBLIC_URL}/imagenes/edfit2.jpeg`} alt="EDGARD JORDAN" />
           </div>
                   <a
           href="https://wa.me/51960225690" // Reemplaza con tu número con código de país (ej: Perú: 51)
@@ -65,7 +65,7 @@ function Home() {
       <section className="perfil3">
         <div className="perfil3-contenido-cambio">
           <div className="perfil3-foto-izquierda">
-            <img src={`${process.env.PUBLIC_URL}/imagenes/edperfil.png`} alt="Entrenador" />
+            <img src={`${process.env.PUBLIC_URL}/imagenes/edfit1.jpeg`} alt="Entrenador" />
           </div>
           <div className="perfil3-texto-cambio">
             <h2>ENTRENAMIENTO PERSONALIZADO</h2>
